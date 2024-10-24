@@ -1,10 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# codeusage: Code Usage in England
+# codeusage
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/ebmdatalab/codeusage/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ebmdatalab/codeusage/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `codeusage` is to make yearly summaries of **SNOMED Code
