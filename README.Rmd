@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# codeusage: Code Usage in England 
+# codeusage
 
 <!-- badges: start -->
 
