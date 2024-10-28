@@ -1,3 +1,5 @@
+#SNOMED tests
+
 test_that("Test snomed_usage column names", {
   test_names <- names(snomed_usage)
   expect_equal(
@@ -49,4 +51,48 @@ test_that("Test snomed_usage date range", {
 test_that("Test sum of usage", {
   test_usage_sum <- sum(snomed_usage$usage)
   expect_equal(test_usage_sum, 41721589830)
+})
+
+#ICD-10 Tests
+
+test_that("Test icd10_usage column types", {
+  expect_s3_class(icd10_usage$start_date, "Date")
+  expect_s3_class(icd10_usage$end_date, "Date")
+  expect_type(icd10_usage$icd10_code, "character")
+  expect_type(icd10_usage$description, "character")
+  expect_type(icd10_usage$usage, "integer")
+})
+
+test_that("Test icd10_usage rows", {
+  test_nrow <- nrow(icd10_usage)
+  expect_equal(test_nrow, 135951)
+})
+
+test_that("Test icd10_usage date range", {
+  test_range_start_date <- range(icd10_usage$start_date)
+  test_range_end_date <- range(icd10_usage$end_date)
+  
+  expect_equal(
+    test_range_start_date,
+    c(as.Date("2012-04-01"), as.Date("2023-04-01"))
+  )
+  expect_equal(
+    test_range_end_date,
+    c(as.Date("2013-03-31"), as.Date("2024-03-31"))
+  )
+})
+
+test_that("Test icd10_usage minimum usage", {
+  test_min_usage <- min(icd10_usage$usage)
+  expect_equal(test_min_usage, 1)
+})
+
+test_that("Test cummulative ICD-10 usage", {
+  test_sum_usage <- sum(icd10_usage$usage)
+  expect_equal(test_sum_usage, 1333658601)
+})
+
+test_that("Test ICD-10 usage are all integers", {
+  test_sum_non_integers <- sum(!is.integer(icd10_usage$usage))
+  expect_equal(test_sum_non_integers, 0)
 })

@@ -20,3 +20,20 @@ NULL
 #' }
 #' @source <https://digital.nhs.uk/data-and-information/publications/statistical/mi-snomed-code-usage-in-primary-care>
 "snomed_usage"
+
+#' ICD-10 Code Usage from Hospital Admitted Patient Care Activity in England
+#'
+#' Yearly summary of ICD-10 code usage from 1st April 2013 to 31st March 2024.
+#' Restricted codes. for which annual usage is not published, have been removed from the dataset.
+#'
+#' @format A data frame with 135,951 rows and 6 columns:
+#' \describe{
+#'   \item{start_date}{Start date of code usage count}
+#'   \item{end_date}{End date of code usage count}
+#'   \item{icd10_code}{ICD-10 Code.
+#'   Note that the punctuation from the code has been removed.}
+#'   \item{usage}{Yearly summary of code usage.}
+#'   \item{description}{Description of ICD-10 Code}
+#' }
+#' @source <https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity>
+"icd10_usage"
