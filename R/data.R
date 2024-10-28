@@ -26,8 +26,7 @@ NULL
 #' Yearly summary of ICD-10 code usage from 1st April 2013 to 31st March 2024.
 #' Restricted codes. for which annual usage is not published, have been removed from the dataset.
 #'
-#' @format ## `icd10_usage`
-#' A data frame with 135,951 rows and 6 columns:
+#' @format A data frame with 135,951 rows and 6 columns:
 #' \describe{
 #'   \item{start_date}{Start date of code usage count}
 #'   \item{end_date}{End date of code usage count}
