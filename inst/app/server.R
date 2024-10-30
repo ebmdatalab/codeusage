@@ -1,10 +1,7 @@
 server <- function(input, output, session) {
   
-  # load(here("icd10_usage.rda"))
-  # load(here("snomed_usage.rda"))
-  
-  icd10_usage <- clinicalActivity::icd10_usage
-  snomed_usage <- clinicalActivity::snomed_usage
+  icd10_usage <- codeusage::icd10_usage
+  snomed_usage <- codeusage::snomed_usage
   
   # Reactive expression for the selected dataset
   selected_data <- reactive({
