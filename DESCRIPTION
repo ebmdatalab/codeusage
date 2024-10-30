@@ -19,4 +19,12 @@ Config/testthat/edition: 3
 URL: https://github.com/ebmdatalab/codeusage
 BugReports: https://github.com/ebmdatalab/codeusage/issues
 Imports: 
+    bsicons,
+    bslib,
+    dplyr,
+    DT,
+    ggplot2,
+    here,
+    plotly,
+    shiny,
     tibble

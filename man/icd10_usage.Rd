@@ -5,17 +5,14 @@
 \alias{icd10_usage}
 \title{ICD-10 Code Usage from Hospital Admitted Patient Care Activity in England}
 \format{
-\subsection{\code{icd10_usage}}{
-
 A data frame with 135,951 rows and 6 columns:
 \describe{
 \item{start_date}{Start date of code usage count}
 \item{end_date}{End date of code usage count}
-\item{icd10_code}{ICD-10 COde.
-Note that the punctuation from the code has been removed.}
+\item{icd10_code}{ICD-10 Code.
+Note that the punctuation from the code has been removed for compatibility with OpenCodelists.}
 \item{usage}{Yearly summary of code usage.}
 \item{description}{Description of ICD-10 Code}
-}
 }
 }
 \source{
