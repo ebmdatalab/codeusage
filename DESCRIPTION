@@ -2,13 +2,13 @@ Package: codeusage
 Title: Clinical Code Usage in England
 Version: 0.0.1
 Authors@R: c(
-    person("Milan", "Wiedemann", "milan.wiedemann@gmail.com", role = c("aut", "cre"),
+    person("Milan", "Wiedemann", email = "milan.wiedemann@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1991-282X")),
-    person("Arina A.", "Tamborska", "arina.tamborska@phc.ox.ac.uk", role = "aut",
+    person("Arina A.", "Tamborska", email = "arina.tamborska@phc.ox.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0003-4661-8407")),
-    person("Rose", "Higgins", "rose.higgins@phc.ox.ac.uk", role = "aut",
+    person("Rose", "Higgins", email = "rose.higgins@phc.ox.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0002-5295-4370")),
-    person("Louis", "Fisher", "louis.fisher@phc.ox.ac.uk", role = "aut",
+    person("Louis", "Fisher", email = "louis.fisher@phc.ox.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0002-0295-3812")))
 Description: SNOMED and ICD-10 Code Usage Counts in England provided by NHS Digital.
 License: MIT + file LICENSE
@@ -33,5 +33,6 @@ Imports:
     here,
     httr2,
     plotly,
+    readr,
     shiny,
     tibble
