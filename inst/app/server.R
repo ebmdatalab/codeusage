@@ -35,18 +35,14 @@ server <- function(input, output, session) {
     }
 
     observeEvent(input$load_codelist, {
-    if (!is.null(input$codelist_id) && input$codelist_id != ""
-        && !is.null(input$codelist_version_tag) && input$codelist_version_tag != "") {
-      csv_url <- paste0("https://www.opencodelists.org/codelist/", 
-                        input$codelist_id, "/", input$codelist_version_tag, 
-                        "/download.csv")
-      codelist <- read.csv(csv_url, header = T)[,1]
-      data <- data %>% filter(code %in% codelist)
-    } else {
-      print("Ensure correct ID & version tag")
+    if (!is.null(input$codelist_url) && input$codelist_url != "") {
+
+      selected_codes <- codeusage::get_opencodelist(input$codelist_url) |> 
+        pull(code)
+
+      data <- data %>% filter(code %in% selected_codes)
     }
   })
-    
     data
   })
   

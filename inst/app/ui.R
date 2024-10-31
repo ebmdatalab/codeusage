@@ -40,7 +40,7 @@ ui <- page_sidebar(
     card(
       card_header("Upload OpenCodelist"),
       textInput(
-        "codelist_id",
+        "codelist_url",
         tooltip(
           span(
             "Codelist URL",
