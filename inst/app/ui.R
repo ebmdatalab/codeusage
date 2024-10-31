@@ -7,36 +7,51 @@ library(DT)
 library(plotly)
 library(here)
 
+foot_data_source <- popover(
+  actionLink("link", "Data sources"),
+  a("SNOMED-CT", href = "https://digital.nhs.uk/data-and-information/publications/statistical/mi-snomed-code-usage-in-primary-care"), "; ",
+  a("ICD-10", href = "https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity")
+)
+
 ui <- page_sidebar(
   theme = bs_theme(version = 5, bootswatch = "lumen"),
-  title = "Clinical Activity Explorer",
+  title = "Code Usage Explorer",
   sidebar = sidebar(
-    selectInput("dataset", "Select dataset:",
+    card(
+      card_header("Select dataset"),
+      radioButtons("dataset", NULL,
                 choices = c(
                   "SNOMED-CT" = "snomed",
                   "ICD-10" = "icd10")
     ),
+    card_footer(foot_data_source)),
+    card(
+      card_header("Search"),
     selectizeInput(
       "code_search",
-      "Search by code:",
+      "Code:",
       choices = NULL,
       multiple = TRUE,
       options = list(maxOptions = 15)),
     textInput(
       "description_search",
-      "Search by description:",
-      ""),
+      "Description:",
+      "")),
     card(
-      card_header("Upload from OpenCodelists"),
+      card_header("Upload OpenCodelist"),
       textInput(
         "codelist_id",
-        "Enter Codelist ID:",
-        placeholder = "nhsd-primary-care-domain-refsets/bp_cod",
-        NULL),
-      textInput(
-        "codelist_version_tag",
-        "Enter Version Tag/ID:",
-        placeholder = "20200812",
+        tooltip(
+          span(
+            "Codelist URL",
+            bs_icon("info-circle")
+          ),
+          "Enter the entire URL to codlist, e.g., https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/bp_cod/20200812/",
+          options = list(
+            customClass = "left-align-tooltip"
+          )
+        ),
+        placeholder = "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/bp_cod/20200812/",
         NULL),
       actionButton("load_codelist", "Load codelist", class = "btn-primary")
     )
@@ -62,14 +77,27 @@ ui <- page_sidebar(
       p(bs_icon("graph-up"), "Trends over time"),
       checkboxInput(
         "show_individual_codes",
-        "Show individual codes (if <= 500)",
+        tooltip(
+          span(
+            "Show individual codes",
+            bs_icon("info-circle")
+          ),
+          "This is only supported for up to 500 selected codes.",
+          placement = "right"
+        ),
         value = FALSE)
       ,
       plotlyOutput("usage_plot")
     ),
     nav_panel(
-      p(bs_icon("file-earmark-medical"), "Codelist"),
+      p(bs_icon("file-earmark-medical"), "Selected codes"),
       DTOutput("codes_table")
     )
-  )
+  ),
+  tags$style(HTML("
+    .left-align-tooltip .tooltip-inner {
+      text-align: left;
+      max-width: 300px;
+    }
+  "))
 )
