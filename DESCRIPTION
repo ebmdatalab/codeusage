@@ -31,6 +31,7 @@ Imports:
     DT,
     ggplot2,
     here,
+    httr2,
     plotly,
     shiny,
     tibble
