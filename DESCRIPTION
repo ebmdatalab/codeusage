@@ -35,4 +35,5 @@ Imports:
     plotly,
     readr,
     shiny,
+    stringr,
     tibble
