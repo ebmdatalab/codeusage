@@ -38,19 +38,19 @@ ui <- page_sidebar(
       "Description:",
       "")),
     card(
-      card_header("Upload OpenCodelist"),
+      card_header(
+        tooltip(
+        span(
+          "Load from OpenCodelist",
+          bs_icon("info-circle")
+        ),
+        "Enter the entire URL, for example: https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/bp_cod/20200812/",
+        options = list(
+          customClass = "left-align-tooltip"
+        )
+      )),
       textInput(
         "codelist_url",
-        tooltip(
-          span(
-            "Codelist URL",
-            bs_icon("info-circle")
-          ),
-          "Enter the entire URL to codlist, e.g., https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/bp_cod/20200812/",
-          options = list(
-            customClass = "left-align-tooltip"
-          )
-        ),
         placeholder = "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/bp_cod/20200812/",
         NULL),
       actionButton("load_codelist", "Load codelist", class = "btn-primary")
@@ -70,10 +70,6 @@ ui <- page_sidebar(
   ),
   navset_card_tab(
     nav_panel(
-      p(bs_icon("file-earmark-spreadsheet"), "Usage table"),
-      DTOutput("usage_table")
-    ),
-    nav_panel(
       p(bs_icon("graph-up"), "Trends over time"),
       checkboxInput(
         "show_individual_codes",
@@ -88,6 +84,10 @@ ui <- page_sidebar(
         value = FALSE)
       ,
       plotlyOutput("usage_plot")
+    ),
+    nav_panel(
+      p(bs_icon("file-earmark-spreadsheet"), "Usage table"),
+      DTOutput("usage_table")
     ),
     nav_panel(
       p(bs_icon("file-earmark-medical"), "Selected codes"),
