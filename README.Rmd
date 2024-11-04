@@ -21,10 +21,10 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-The goal of `codeusage` is to make yearly summaries of **SNOMED Code Usage in Primary Care** and **ICD-10 Code Usage in Secondary Care** in England, published by NHS Digital available in R for research. The original data is available from NHS Digital at:
+The goal of `codeusage` is to make yearly summaries of **SNOMED Code Usage in Primary Care** and **ICD-10 and OPCS Code Usage in Secondary Care** in England, published by NHS Digital available in R for research. The original data is available from NHS Digital at:
 
 -   [SNOMED Code Usage in Primary Care](https://digital.nhs.uk/data-and-information/publications/statistical/mi-snomed-code-usage-in-primary-care)
--   [ICD-10 Code Usage in Secondary Care](https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity)
+-   [ICD-10 and OPCS Code Usage in Secondary Care](https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity)
 
 ## Installation
 
@@ -52,11 +52,22 @@ snomed_usage
 
 ### Dataset: ICD-10 Code Usage in Secondary Care in England
 
-This package contains ICD-10 codes included in all diagnosis fields of the Finished Consultant Episodes (FCE) in the Hospital Episode Statistics in England.
+This is the total annual count of the Finished Consultant Episodes (FCE) listing each 4-character ICD-10 code either in primary or secondary diagnosis position in the Hospital Episode Statistics in England.
 
 This is only a selection of the full dataset published by NHS Digital, for the data pre-processing see `/data-raw/icd10_usage.R`.
 
 ```{r icd10-usage}
 # Return ICD-10 code usage data
 icd10_usage
+```
+
+### Dataset: OPCS Code Usage in Secondary Care in England
+
+This is the total annual count of each instance that each 4-character OPCS code is listed across all primary and secondary procedure positions in the Finished Consultant Episodes (FCE) of the Hospital Episode Statistics in England.
+
+This is only a selection of the full dataset published by NHS Digital, for the data pre-processing see `/data-raw/opcs_usage.R`.
+
+```{r opcs-usage}
+# Return OPCS code usage data
+opcs_usage
 ```
