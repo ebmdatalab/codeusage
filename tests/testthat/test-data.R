@@ -1,4 +1,4 @@
-#SNOMED tests
+# SNOMED tests
 
 test_that("Test snomed_usage column names", {
   test_names <- names(snomed_usage)
@@ -25,7 +25,6 @@ test_that("Test snomed_usage column types", {
   expect_type(snomed_usage$usage, "integer")
   expect_type(snomed_usage$active_at_start, "logical")
   expect_type(snomed_usage$active_at_end, "logical")
-  
 })
 
 
@@ -53,7 +52,7 @@ test_that("Test sum of usage", {
   expect_equal(test_usage_sum, 41721589830)
 })
 
-#ICD-10 Tests
+# ICD-10 Tests
 
 test_that("Test icd10_usage column types", {
   expect_s3_class(icd10_usage$start_date, "Date")
@@ -71,7 +70,7 @@ test_that("Test icd10_usage rows", {
 test_that("Test icd10_usage date range", {
   test_range_start_date <- range(icd10_usage$start_date)
   test_range_end_date <- range(icd10_usage$end_date)
-  
+
   expect_equal(
     test_range_start_date,
     c(as.Date("2012-04-01"), as.Date("2023-04-01"))
@@ -97,7 +96,7 @@ test_that("Test ICD-10 usage are all integers", {
   expect_equal(test_sum_non_integers, 0)
 })
 
-#OPCS Tests
+# OPCS Tests
 
 test_that("Test opcs_usage column types", {
   expect_s3_class(opcs_usage$start_date, "Date")
@@ -115,7 +114,7 @@ test_that("Test opcs_usage rows", {
 test_that("Test opcs_usage date range", {
   test_range_start_date <- range(opcs_usage$start_date)
   test_range_end_date <- range(opcs_usage$end_date)
-  
+
   expect_equal(
     test_range_start_date,
     c(as.Date("2012-04-01"), as.Date("2023-04-01"))
@@ -136,12 +135,12 @@ test_that("Test OPCS usage are all integers", {
   expect_equal(test_sum_non_integers, 0)
 })
 
-sum_all_nas <- function(df){
-  na_sum<- sum(colSums(is.na(df)))
+sum_all_nas <- function(df) {
+  na_sum <- sum(colSums(is.na(df)))
   return(na_sum)
 }
 
 test_that("Test no missing data points", {
   test_sum_nas <- sum_all_nas(opcs_usage)
   expect_equal(test_sum_nas, 0)
-} )
+})

@@ -11,7 +11,8 @@ icd10_code_usage_urls <- list(
     url = paste0(url_start, "A5/5B8474/hosp-epis-stat-admi-diag-2023-24-tab.xlsx"),
     sheet = 6,
     skip_rows = 12,
-    usage_col = 8),
+    usage_col = 8
+  ),
   "fy22to23" = list(
     url = paste0(url_start, "7A/DB1B00/hosp-epis-stat-admi-diag-2022-23-tab_V2.xlsx"),
     sheet = 6,
@@ -114,7 +115,6 @@ select_all_diag_counts <- function(data, url_list) {
 get_icd10_data <- function(url_list, ...) {
   df_temp <- read_icd10_usage_xlsx_from_url(url_list, ...)
   select_all_diag_counts(df_temp, url_list)
-  
 }
 
 icd10_usage <- icd10_code_usage_urls |>
@@ -123,11 +123,13 @@ icd10_usage <- icd10_code_usage_urls |>
   separate(nhs_fy, c("start_date", "end_date"), "to") |>
   mutate(
     start_date = as.Date(
-      paste0("20", str_extract_all(start_date, "\\d+"), "-04-01")),
+      paste0("20", str_extract_all(start_date, "\\d+"), "-04-01")
+    ),
     end_date = as.Date(
-      paste0("20", str_extract_all(end_date, "\\d+"), "-03-31")),
+      paste0("20", str_extract_all(end_date, "\\d+"), "-03-31")
+    ),
     icd10_code = str_replace_all(icd10_code, "\\.", "")
-  )|>
+  ) |>
   filter(!is.na(usage))
 
 usethis::use_data(
