@@ -24,16 +24,37 @@ NULL
 #' ICD-10 Code Usage from Hospital Admitted Patient Care Activity in England
 #'
 #' Yearly summary of ICD-10 code usage from 1st April 2013 to 31st March 2024.
-#' Restricted codes. for which annual usage is not published, have been removed from the dataset.
+#' All diagnosis codes are summarised to the 4-character level.
+#' The code usage represents the total annual count of episodes which record in any primary or secondary position.
+#' Restricted codes for which annual usage is not published, have been removed.
 #'
-#' @format A data frame with 135,951 rows and 6 columns:
+#' @format A data frame with 135,951 rows and 5 columns:
 #' \describe{
 #'   \item{start_date}{Start date of code usage count}
 #'   \item{end_date}{End date of code usage count}
-#'   \item{icd10_code}{ICD-10 Code.
+#'   \item{icd10_code}{The 4-character ICD-10 Code.
 #'   Note that the punctuation from the code has been removed for compatibility with OpenCodelists.}
 #'   \item{usage}{Yearly summary of code usage.}
 #'   \item{description}{Description of ICD-10 Code}
 #' }
 #' @source <https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity>
 "icd10_usage"
+
+#' OPCS Code Usage from Hospital Admitted Patient Care Activity in England
+#'
+#' Yearly summary of OPCS code usage from 1st April 2013 to 31st March 2024.
+#' All procedure codes are summarised to the 4-character level.
+#' The code usage represents total annual count of each procedure, recorded across the primary and the secondary procedure positions.
+#' Restricted codes for which annual usage is not published, have been removed.
+#'
+#' @format A data frame with 107,376 rows and 5 columns:
+#' \describe{
+#'   \item{start_date}{Start date of code usage count}
+#'   \item{end_date}{End date of code usage count}
+#'   \item{opcs_code}{The 4-character OPCS code.
+#'   Note that the punctuation from the code has been removed for compatibility with OpenCodelists.}
+#'   \item{usage}{Yearly summary of code usage.}
+#'   \item{description}{Description of OPCS Code}
+#' }
+#' @source <https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity>
+"opcs_usage"
