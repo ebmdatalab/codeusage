@@ -53,7 +53,6 @@ snomed_usage
 ### Dataset: ICD-10 Code Usage in Secondary Care in England
 
 This is the total annual count of the Finished Consultant Episodes (FCE) listing each 4-character ICD-10 code either in primary or secondary diagnosis position in the Hospital Episode Statistics in England.
-
 This is only a selection of the full dataset published by NHS Digital, for the data pre-processing see `/data-raw/icd10_usage.R`.
 
 ```{r icd10-usage}
@@ -64,7 +63,6 @@ icd10_usage
 ### Dataset: OPCS Code Usage in Secondary Care in England
 
 This is the total annual count of each instance that each 4-character OPCS code is listed across all primary and secondary procedure positions in the Finished Consultant Episodes (FCE) of the Hospital Episode Statistics in England.
-
 This is only a selection of the full dataset published by NHS Digital, for the data pre-processing see `/data-raw/opcs_usage.R`.
 
 ```{r opcs-usage}
