@@ -51,10 +51,10 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>The goal of <code>codeusage</code> is to make yearly summaries of <strong>SNOMED Code Usage in Primary Care</strong> and <strong>ICD-10 Code Usage in Secondary Care</strong> in England, published by NHS Digital available in R for research. The original data is available from NHS Digital at:</p>
+<p>The goal of <code>codeusage</code> is to make yearly summaries of <strong>SNOMED Code Usage in Primary Care</strong> and <strong>ICD-10 and OPCS Code Usage in Secondary Care</strong> in England, published by NHS Digital, available in R for research. The original data is available from NHS Digital at:</p>
 <ul>
 <li><a href="https://digital.nhs.uk/data-and-information/publications/statistical/mi-snomed-code-usage-in-primary-care" class="external-link">SNOMED Code Usage in Primary Care</a></li>
-<li><a href="https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity" class="external-link">ICD-10 Code Usage in Secondary Care</a></li>
+<li><a href="https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity" class="external-link">ICD-10 and OPCS Code Usage in Secondary Care</a></li>
 </ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -77,42 +77,66 @@
 <code class="sourceCode R"><span><span class="co"># Return SNOMED code usage data</span></span>
 <span><span class="va">snomed_usage</span></span>
 <span><span class="co">#&gt; # A tibble: 1,523,967 × 7</span></span>
-<span><span class="co">#&gt;    start_date end_date   snomed_concept_id description           usage active_at_start active_at_end</span></span>
-<span><span class="co">#&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;             &lt;chr&gt;                 &lt;int&gt; &lt;lgl&gt;           &lt;lgl&gt;        </span></span>
-<span><span class="co">#&gt;  1 2023-08-01 2024-07-31 279991000000102   Short message servi… 4.41e8 TRUE            TRUE         </span></span>
-<span><span class="co">#&gt;  2 2023-08-01 2024-07-31 184103008         Patient telephone n… 1.91e8 TRUE            TRUE         </span></span>
-<span><span class="co">#&gt;  3 2023-08-01 2024-07-31 428481002         Patient mobile tele… 1.16e8 TRUE            TRUE         </span></span>
-<span><span class="co">#&gt;  4 2023-08-01 2024-07-31 423876004         Clinical document (… 7.81e7 TRUE            TRUE         </span></span>
-<span><span class="co">#&gt;  5 2023-08-01 2024-07-31 72313002          Systolic arterial p… 6.87e7 TRUE            TRUE         </span></span>
-<span><span class="co">#&gt;  6 2023-08-01 2024-07-31 1091811000000102  Diastolic arterial … 6.87e7 TRUE            TRUE         </span></span>
-<span><span class="co">#&gt;  7 2023-08-01 2024-07-31 1000731000000107  Serum creatinine le… 4.82e7 TRUE            TRUE         </span></span>
-<span><span class="co">#&gt;  8 2023-08-01 2024-07-31 60621009          Body mass index (ob… 4.65e7 TRUE            TRUE         </span></span>
-<span><span class="co">#&gt;  9 2023-08-01 2024-07-31 1000661000000107  Serum sodium level … 4.63e7 TRUE            TRUE         </span></span>
-<span><span class="co">#&gt; 10 2023-08-01 2024-07-31 1000651000000109  Serum potassium lev… 4.62e7 TRUE            TRUE         </span></span>
-<span><span class="co">#&gt; # ℹ 1,523,957 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt;    start_date end_date   snomed_concept_id description     usage active_at_start</span></span>
+<span><span class="co">#&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;             &lt;chr&gt;           &lt;int&gt; &lt;lgl&gt;          </span></span>
+<span><span class="co">#&gt;  1 2023-08-01 2024-07-31 279991000000102   Short message… 4.41e8 TRUE           </span></span>
+<span><span class="co">#&gt;  2 2023-08-01 2024-07-31 184103008         Patient telep… 1.91e8 TRUE           </span></span>
+<span><span class="co">#&gt;  3 2023-08-01 2024-07-31 428481002         Patient mobil… 1.16e8 TRUE           </span></span>
+<span><span class="co">#&gt;  4 2023-08-01 2024-07-31 423876004         Clinical docu… 7.81e7 TRUE           </span></span>
+<span><span class="co">#&gt;  5 2023-08-01 2024-07-31 72313002          Systolic arte… 6.87e7 TRUE           </span></span>
+<span><span class="co">#&gt;  6 2023-08-01 2024-07-31 1091811000000102  Diastolic art… 6.87e7 TRUE           </span></span>
+<span><span class="co">#&gt;  7 2023-08-01 2024-07-31 1000731000000107  Serum creatin… 4.82e7 TRUE           </span></span>
+<span><span class="co">#&gt;  8 2023-08-01 2024-07-31 60621009          Body mass ind… 4.65e7 TRUE           </span></span>
+<span><span class="co">#&gt;  9 2023-08-01 2024-07-31 1000661000000107  Serum sodium … 4.63e7 TRUE           </span></span>
+<span><span class="co">#&gt; 10 2023-08-01 2024-07-31 1000651000000109  Serum potassi… 4.62e7 TRUE           </span></span>
+<span><span class="co">#&gt; # ℹ 1,523,957 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 1 more variable: active_at_end &lt;lgl&gt;</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="dataset-icd-10-code-usage-in-secondary-care-in-england">Dataset: ICD-10 Code Usage in Secondary Care in England<a class="anchor" aria-label="anchor" href="#dataset-icd-10-code-usage-in-secondary-care-in-england"></a>
 </h3>
-<p>This package contains ICD-10 codes included in all diagnosis fields of the Finished Consultant Episodes (FCE) in the Hospital Episode Statistics in England.</p>
+<p>This is the total annual count of the Finished Consultant Episodes (FCE) listing each 4-character ICD-10 code either in primary or secondary diagnosis position in the Hospital Episode Statistics in England.</p>
 <p>This is only a selection of the full dataset published by NHS Digital, for the data pre-processing see <code>/data-raw/icd10_usage.R</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Return ICD-10 code usage data</span></span>
 <span><span class="va">icd10_usage</span></span>
 <span><span class="co">#&gt; # A tibble: 135,951 × 5</span></span>
-<span><span class="co">#&gt;    start_date end_date   icd10_code description                                        usage</span></span>
-<span><span class="co">#&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;chr&gt;                                              &lt;int&gt;</span></span>
-<span><span class="co">#&gt;  1 2023-04-01 2024-03-31 A000       Cholera due to Vibrio cholerae 01, biovar cholerae     2</span></span>
-<span><span class="co">#&gt;  2 2023-04-01 2024-03-31 A009       Cholera, unspecified                                  40</span></span>
-<span><span class="co">#&gt;  3 2023-04-01 2024-03-31 A010       Typhoid fever                                        884</span></span>
-<span><span class="co">#&gt;  4 2023-04-01 2024-03-31 A011       Paratyphoid fever A                                  139</span></span>
-<span><span class="co">#&gt;  5 2023-04-01 2024-03-31 A012       Paratyphoid fever B                                   13</span></span>
-<span><span class="co">#&gt;  6 2023-04-01 2024-03-31 A013       Paratyphoid fever C                                    2</span></span>
-<span><span class="co">#&gt;  7 2023-04-01 2024-03-31 A014       Paratyphoid fever, unspecified                        68</span></span>
-<span><span class="co">#&gt;  8 2023-04-01 2024-03-31 A020       Salmonella enteritis                                2165</span></span>
-<span><span class="co">#&gt;  9 2023-04-01 2024-03-31 A021       Salmonella sepsis                                    319</span></span>
-<span><span class="co">#&gt; 10 2023-04-01 2024-03-31 A022       Localized salmonella infections                       82</span></span>
+<span><span class="co">#&gt;    start_date end_date   icd10_code description                            usage</span></span>
+<span><span class="co">#&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;chr&gt;                                  &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1 2023-04-01 2024-03-31 A000       Cholera due to Vibrio cholerae 01, bi…     2</span></span>
+<span><span class="co">#&gt;  2 2023-04-01 2024-03-31 A009       Cholera, unspecified                      40</span></span>
+<span><span class="co">#&gt;  3 2023-04-01 2024-03-31 A010       Typhoid fever                            884</span></span>
+<span><span class="co">#&gt;  4 2023-04-01 2024-03-31 A011       Paratyphoid fever A                      139</span></span>
+<span><span class="co">#&gt;  5 2023-04-01 2024-03-31 A012       Paratyphoid fever B                       13</span></span>
+<span><span class="co">#&gt;  6 2023-04-01 2024-03-31 A013       Paratyphoid fever C                        2</span></span>
+<span><span class="co">#&gt;  7 2023-04-01 2024-03-31 A014       Paratyphoid fever, unspecified            68</span></span>
+<span><span class="co">#&gt;  8 2023-04-01 2024-03-31 A020       Salmonella enteritis                    2165</span></span>
+<span><span class="co">#&gt;  9 2023-04-01 2024-03-31 A021       Salmonella sepsis                        319</span></span>
+<span><span class="co">#&gt; 10 2023-04-01 2024-03-31 A022       Localized salmonella infections           82</span></span>
 <span><span class="co">#&gt; # ℹ 135,941 more rows</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="dataset-opcs-code-usage-in-secondary-care-in-england">Dataset: OPCS Code Usage in Secondary Care in England<a class="anchor" aria-label="anchor" href="#dataset-opcs-code-usage-in-secondary-care-in-england"></a>
+</h3>
+<p>This is the total annual count of each instance that each 4-character OPCS code is listed across all primary and secondary procedure positions in the Finished Consultant Episodes (FCE) of the Hospital Episode Statistics in England.</p>
+<p>This is only a selection of the full dataset published by NHS Digital, for the data pre-processing see <code>/data-raw/opcs_usage.R</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Return OPCS code usage data</span></span>
+<span><span class="va">opcs_usage</span></span>
+<span><span class="co">#&gt; # A tibble: 107,376 × 5</span></span>
+<span><span class="co">#&gt;    start_date end_date   opcs_code description                             usage</span></span>
+<span><span class="co">#&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;                                   &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1 2023-04-01 2024-03-31 A011      Hemispherectomy                             7</span></span>
+<span><span class="co">#&gt;  2 2023-04-01 2024-03-31 A012      Total lobectomy of brain                   36</span></span>
+<span><span class="co">#&gt;  3 2023-04-01 2024-03-31 A013      Partial lobectomy of brain                134</span></span>
+<span><span class="co">#&gt;  4 2023-04-01 2024-03-31 A018      Other specified major excision of tiss…    27</span></span>
+<span><span class="co">#&gt;  5 2023-04-01 2024-03-31 A019      Unspecified major excision of tissue o…     3</span></span>
+<span><span class="co">#&gt;  6 2023-04-01 2024-03-31 A021      Excision of lesion of tissue of fronta…  1399</span></span>
+<span><span class="co">#&gt;  7 2023-04-01 2024-03-31 A022      Excision of lesion of tissue of tempor…   971</span></span>
+<span><span class="co">#&gt;  8 2023-04-01 2024-03-31 A023      Excision of lesion of tissue of pariet…   704</span></span>
+<span><span class="co">#&gt;  9 2023-04-01 2024-03-31 A024      Excision of lesion of tissue of occipi…   260</span></span>
+<span><span class="co">#&gt; 10 2023-04-01 2024-03-31 A025      Excision of lesion of tissue of cerebe…   604</span></span>
+<span><span class="co">#&gt; # ℹ 107,366 more rows</span></span></code></pre></div>
 </div>
 </div>
 </div>
