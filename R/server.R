@@ -1,4 +1,17 @@
-server <- function(input, output, session) {
+#' The application server-side
+#' 
+#' @param input,output,session Internal parameters for {shiny}.
+#' @noRd
+#' @import shiny
+#' @import bslib
+#' @import bsicons
+#' @import dplyr
+#' @import ggplot2
+#' @importFrom DT renderDT datatable
+#' @importFrom plotly renderPlotly ggplotly plot_ly config add_lines layout
+#' @import here
+
+app_server <- function(input, output, session) {
   
   icd10_usage <- codeusage::icd10_usage
   snomed_usage <- codeusage::snomed_usage
@@ -188,13 +201,13 @@ server <- function(input, output, session) {
       group_by(start_date) %>%
       summarise(total_usage = sum(usage, na.rm = TRUE))
     
-    plot_ly(data_spark, hoverinfo = "none") %>%
-      add_lines(
+    plotly::plot_ly(data_spark, hoverinfo = "none") %>%
+      plotly::add_lines(
         x = ~start_date, y = ~total_usage,
         color = I("black"), span = I(1),
         fill = 'tozeroy', alpha = 0.2
       ) %>%
-      layout(
+        plotly::layout(
         xaxis = list(visible = F, showgrid = F, title = ""),
         yaxis = list(visible = F, showgrid = F, title = ""),
         hovermode = "x",
@@ -203,7 +216,7 @@ server <- function(input, output, session) {
         paper_bgcolor = "transparent",
         plot_bgcolor = "transparent"
       ) %>%
-      config(displayModeBar = FALSE)
+      plotly::config(displayModeBar = FALSE)
   })
   
 }

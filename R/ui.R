@@ -1,13 +1,16 @@
-library(shiny)
-library(bslib)
-library(bsicons)
-library(dplyr)
-library(ggplot2)
-library(DT)
-library(plotly)
-library(here)
+#' The application User-Interface
+#'
+#' @param request Internal parameter for `{shiny}`.
+#' @noRd
+#' @import shiny
+#' @import bslib
+#' @import bsicons
+#' @importFrom DT DTOutput
+#' @importFrom plotly plotlyOutput
 
-ui <- page_sidebar(
+
+app_ui = function(request) {
+page_sidebar(
   theme = bs_theme(version = 5, bootswatch = "lumen"),
   title = "Clinical Activity Explorer",
   sidebar = sidebar(
@@ -73,3 +76,4 @@ ui <- page_sidebar(
     )
   )
 )
+}
