@@ -31,7 +31,11 @@ Imports:
     DT,
     ggplot2,
     here,
+    httr2,
     plotly,
+    purrr,
     readr,
+    S7,
     shiny,
+    stringr,
     tibble
