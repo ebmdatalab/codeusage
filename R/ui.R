@@ -5,6 +5,7 @@
 #' @import shiny
 #' @import bslib
 #' @import bsicons
+#' @importFrom tibble as_tibble
 #' @importFrom DT DTOutput
 #' @importFrom plotly plotlyOutput
 

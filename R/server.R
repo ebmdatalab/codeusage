@@ -14,7 +14,7 @@
 #' @import here
 
 app_server <- function(input, output, session) {
-  # Reactive expression for the selected dataset
+  # DATA: Selected code usage dataset
   selected_data <- reactive({
     if (input$dataset == "snomed") {
       codeusage::snomed_usage %>%
@@ -28,7 +28,7 @@ app_server <- function(input, output, session) {
     }
   })
 
-  # Update selectizeInput choices
+  # Update choices
   observe({
     updateSelectizeInput(
       session, "code_search",
@@ -37,16 +37,27 @@ app_server <- function(input, output, session) {
     )
   })
 
-  opencodelist <- reactiveVal(NULL)
+  # DATA: OpenCodelist
+  selected_codelist <- reactive({
+    req(input$codelist_slug)
 
-  observeEvent(input$load_codelist, {
-    if (!is.null(input$codelist_slug) && input$codelist_slug != "") {
-      opencodelist <- get_codelist(input$codelist_slug) |>
-        select(1:2)
-    }
-  })
+    tryCatch(
+      {
+        codelist_s7 <- get_codelist(input$codelist_slug)
+        codelist_df <- codelist_s7 |>
+          tibble::as_tibble() |>
+          dplyr::select(1:2)
 
-  # Filtered data
+        codelist_df
+      },
+      error = function(e) {
+        showNotification("Error loading Codelist.", type = "error")
+      }
+    )
+  }) |>
+    bindEvent(input$load_codelist, ignoreNULL = FALSE)
+
+  # DATA: Filtered usage data
   filtered_data <- reactive({
     data <- selected_data()
 
@@ -58,10 +69,14 @@ app_server <- function(input, output, session) {
       data <- data %>% filter(grepl(input$description_search, description, ignore.case = TRUE))
     }
 
+    if (!is.null(input$codelist_slug) && input$codelist_slug != "") {
+      data <- data %>% filter(code %in% selected_codelist()$code)
+    }
+
     data
   })
 
-  # Value boxes
+  # VALUE BOXES: Unique codes and total activity
   output$unique_codes <- renderText({
     scales::comma(length(unique(filtered_data()$code)))
   })
@@ -70,7 +85,7 @@ app_server <- function(input, output, session) {
     scales::comma(sum(filtered_data()$usage, na.rm = TRUE))
   })
 
-  # Code usage table
+  # TABLE: Code usage
   output$usage_table <- renderDT({
     filtered_data() %>%
       select(-end_date) %>%
@@ -91,7 +106,7 @@ app_server <- function(input, output, session) {
       )
   })
 
-  # Selected codes table
+  # TABLE: Selected codes
   output$codes_table <- renderDT({
     filtered_data() %>%
       select(code, description) %>%
@@ -117,7 +132,7 @@ app_server <- function(input, output, session) {
       )
   })
 
-  # Code usage trends over time
+  # PLOT: Trends over time
   output$usage_plot <- renderPlotly({
     scale_x_date_breaks <- unique(filtered_data()$start_date)
     unique_codes <- length(unique(filtered_data()$code))
@@ -202,7 +217,7 @@ app_server <- function(input, output, session) {
       plotly::config(displayModeBar = FALSE)
   })
 
-  # Sparkline overview
+  # PLOT: Sparkline overview
   output$sparkline <- renderPlotly({
     data_spark <- filtered_data() %>%
       group_by(start_date) %>%
