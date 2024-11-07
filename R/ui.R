@@ -29,34 +29,49 @@ app_ui <- function(request) {
         card_header("Select codes"),
         selectizeInput(
           "code_search",
-          "Specific code",
+          tooltip(
+            span(
+              "Specific code",
+              bs_icon("info-circle")
+            ),
+            "Select specific clinical codes. Start typing to see a selection of available codes.",
+            options = list(
+              customClass = "left-align-tooltip"
+            )
+          ),
           choices = NULL,
           multiple = TRUE,
           options = list(maxOptions = 15)
         ),
         textInput(
           "description_search",
-          "Description",
-          ""
-        )
-      ),
-      card(
-        card_header(
           tooltip(
             span(
-              "Load from OpenCodelist",
+              "Description",
               bs_icon("info-circle")
             ),
-            "Enter <codelist_id>/<version_id>, for example: 'nhsd-primary-care-domain-refsets/bp_cod/20200812'",
+            "Enter search term(s). Multiple terms can be combined by using '|' e.g., 'anxiety|depression'",
             options = list(
               customClass = "left-align-tooltip"
             )
           )
-        ),
+        )
+      ),
+      card(
+        card_header("Load from OpenCodelist"),
         textInput(
           "codelist_slug",
-          "Codelist ID / Version Tag",
-          placeholder = "nhsd-primary-care-domain-refsets/bp_cod/20200812",
+          tooltip(
+            span(
+              "Codelist ID / Version Tag",
+              bs_icon("info-circle")
+            ),
+            "Enter <codelist_id>/<version_id>, e.g., 'opensafely/anxiety-disorders/6aef605a'",
+            options = list(
+              customClass = "left-align-tooltip"
+            )
+          ),
+          placeholder = "opensafely/anxiety-disorders/6aef605a",
           NULL
         ),
         actionButton("load_codelist", "Load codelist", class = "btn-primary")
