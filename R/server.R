@@ -124,12 +124,13 @@ app_server <- function(input, output, session) {
           scrollX = TRUE,
           searching = FALSE,
           dom = "Bfrtip",
-          buttons = list("copy", 
+          buttons = list(
+            "copy",
             list(
               extend = "csv",
               title = paste0("selected_", input$dataset, "_codes")
             )
-        ),
+          ),
           deferRender = TRUE,
           scrollY = 400,
           scroller = TRUE
@@ -243,7 +244,7 @@ app_server <- function(input, output, session) {
         paper_bgcolor = "transparent",
         plot_bgcolor = "transparent"
       ) %>%
-      plotly::config(displayModeBar = FALSE) |> 
+      plotly::config(displayModeBar = FALSE) |>
       layout(xaxis = list(fixedrange = TRUE), yaxis = list(fixedrange = TRUE))
   })
 }
