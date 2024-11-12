@@ -1,9 +1,20 @@
 #' Codelist
-#' @field coding_system String, specifying the coding system of the codelist.
-#' @field full_slug Full slug of the codelist from OpenCodelists.
+#' Note that the "@usage" argument is explicitly coded here to suppress an error.
+#' This is most likely due to S7 class, we should revisit this in future.
+#' @param .data Initial data
+#' @param row.names Row names
+#' @section Properties:
+#' \describe{
+#'   \item{coding_system}{String, specifying the coding system of the codelist.}
+#'   \item{full_slug}{slug of the codelist from OpenCodelists.}
+#' }
 #' @return New instance of class Codelist
 #' @keywords internal
 #' @importFrom S7 new_class class_data.frame class_character
+#' @usage Codelist(.data = list(),
+#' row.names = NULL,
+#' coding_system = character(0),
+#' full_slug = character(0))
 Codelist <- S7::new_class("Codelist",
   parent = S7::class_data.frame,
   properties = list(

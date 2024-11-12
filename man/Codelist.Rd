@@ -2,27 +2,34 @@
 % Please edit documentation in R/opencodelists.R
 \name{Codelist}
 \alias{Codelist}
-\title{Codelist}
+\title{Codelist
+Note that the "@usage" argument is explicitly coded here to suppress an error.
+This is most likely due to S7 class, we should revisit this in future.}
 \usage{
-Codelist(
-  .data = list(),
-  row.names = NULL,
-  coding_system = class_missing,
-  full_slug = class_missing
-)
+Codelist(.data = list(),
+row.names = NULL,
+coding_system = character(0),
+full_slug = character(0))
+}
+\arguments{
+\item{.data}{Initial data}
+
+\item{row.names}{Row names}
 }
 \value{
 New instance of class Codelist
 }
 \description{
 Codelist
+Note that the "@usage" argument is explicitly coded here to suppress an error.
+This is most likely due to S7 class, we should revisit this in future.
 }
-\section{Fields}{
+\section{Properties}{
 
 \describe{
-\item{\code{coding_system}}{String, specifying the coding system of the codelist.}
-
-\item{\code{full_slug}}{Full slug of the codelist from OpenCodelists.}
-}}
+\item{coding_system}{String, specifying the coding system of the codelist.}
+\item{full_slug}{slug of the codelist from OpenCodelists.}
+}
+}
 
 \keyword{internal}
