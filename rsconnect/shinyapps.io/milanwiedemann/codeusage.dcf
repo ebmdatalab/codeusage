@@ -1,0 +1,10 @@
+name: codeusage
+title:
+username: milanwiedemann
+account: milanwiedemann
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 13256956
+bundleId: 9325794
+url: https://milanwiedemann.shinyapps.io/codeusage/
+version: 1
