@@ -9,10 +9,9 @@
 
 <!-- badges: end -->
 
-The goal of `codeusage` is to make yearly summaries of **SNOMED Code
-Usage in Primary Care** and **ICD-10 and OPCS Code Usage in Secondary
-Care** in England, published by NHS Digital, available in R for
-research. The original data is available from NHS Digital at:
+The goal of `codeusage` is to make yearly summaries of **SNOMED CodevUsage in Primary Care** and **ICD-10 and OPCS Code Usage in SecondaryvCare** in England, published by NHS Digital, available in R forvresearch.
+The interactive [Code Usage Explorer](https://milanwiedemann.shinyapps.io/codeusage/) app allows users to explore the data online.
+The original data is available from NHS Digital at:
 
 - [SNOMED Code Usage in Primary
   Care](https://digital.nhs.uk/data-and-information/publications/statistical/mi-snomed-code-usage-in-primary-care)
