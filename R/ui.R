@@ -19,7 +19,7 @@ app_ui <- function(request) {
         card_header("Select dataset"),
         radioButtons("dataset", NULL,
           choices = c(
-            "SNOMED-CT" = "snomed",
+            "SNOMED-CT" = "snomedct",
             "ICD-10" = "icd10",
             "OPCS" = "opcs"
           )

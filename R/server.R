@@ -16,14 +16,14 @@
 app_server <- function(input, output, session) {
   # DATA: Selected code usage dataset
   selected_data <- reactive({
-    if (input$dataset == "snomed") {
-      codeusage::snomed_usage %>%
+    if (input$dataset == "snomedct") {
+      codeusage::snomed_usage |>
         select(start_date, end_date, code = snomed_concept_id, description, usage)
     } else if (input$dataset == "icd10") {
-      codeusage::icd10_usage %>%
+      codeusage::icd10_usage |>
         select(start_date, end_date, code = icd10_code, description, usage)
     } else if (input$dataset == "opcs") {
-      codeusage::opcs_usage %>%
+      codeusage::opcs_usage |>
         select(start_date, end_date, code = opcs_code, description, usage)
     }
   })
@@ -41,39 +41,69 @@ app_server <- function(input, output, session) {
   selected_codelist <- reactive({
     req(input$codelist_slug)
 
-    tryCatch(
-      {
-        codelist_s7 <- get_codelist(input$codelist_slug)
-        codelist_df <- codelist_s7 |>
-          tibble::as_tibble() |>
-          dplyr::select(1:2)
+    withProgress(message = "Loading codelist ...", {
+      tryCatch(
+        {
+          codelist_s7 <- get_codelist(input$codelist_slug)
 
-        codelist_df
-      },
-      error = function(e) {
-        showNotification("Error loading Codelist.", type = "error")
-      }
-    )
+          if (codelist_s7@coding_system == input$dataset) {
+            showNotification(
+              paste0("Successfully loaded ", codelist_s7@coding_system, " codelist."),
+              type = "default"
+            )
+          } else {
+            showNotification(
+              paste0("Loaded codelist (", codelist_s7@coding_system, ") does not match selected data (", input$dataset, ")."),
+              type = "error"
+            )
+          }
+
+
+          codelist_s7 |>
+            tibble::as_tibble() |>
+            dplyr::select(1:2)
+        },
+        error = function(e) {
+          showNotification(
+            sprintf("Error loading Codelist: %s", conditionMessage(e)),
+            type = "error"
+          )
+          NULL
+        }
+      )
+    })
   }) |>
-    bindEvent(input$load_codelist, ignoreNULL = FALSE)
+    bindEvent(input$load_codelist)
 
   # DATA: Filtered usage data
+  
   filtered_data <- reactive({
-    data <- selected_data()
+    req(selected_data())
 
-    if (!is.null(input$code_search) && length(input$code_search) > 0) {
-      data <- data %>% filter(code %in% input$code_search)
-    }
+    withProgress(message = "Filtering data ...", {
+      data <- selected_data()
 
-    if (!is.null(input$description_search) && input$description_search != "") {
-      data <- data %>% filter(grepl(input$description_search, description, ignore.case = TRUE))
-    }
+      if (!is.null(input$code_search) && length(input$code_search) > 0) {
+        data <- data |>
+          filter(code %in% input$code_search)
+      }
 
-    if (!is.null(input$codelist_slug) && input$codelist_slug != "") {
-      data <- data %>% filter(code %in% selected_codelist()$code)
-    }
+      if (!is.null(input$description_search) && input$description_search != "") {
+        data <- data |>
+          filter(grepl(input$description_search, description, ignore.case = TRUE))
+      }
 
-    data
+      if (!is.null(selected_codelist())) {
+        data <- data |>
+          filter(code %in% selected_codelist()$code)
+      }
+
+      if (nrow(data) == 0) {
+        showNotification("No data matches your current filters.", type = "warning")
+      }
+
+      data
+    })
   })
 
   # VALUE BOXES: Unique codes and total activity
@@ -87,164 +117,50 @@ app_server <- function(input, output, session) {
 
   # TABLE: Code usage
   output$usage_table <- renderDT({
-    filtered_data() %>%
-      select(-end_date) %>%
-      datatable(
-        colnames = c("Start date", "Code", "Description", "Usage"),
-        rownames = FALSE,
-        options = list(
-          columnDefs = list(
-            list(width = "60px", targets = 0),
-            list(width = "80px", targets = 1),
-            list(width = "350px", targets = 2),
-            list(width = "60px", targets = 3)
-          ),
-          pageLength = 10,
-          scrollX = TRUE,
-          searching = FALSE
-        )
-      )
+    filtered_data() |>
+      select(-end_date) |>
+      datatable_usage()
   })
 
-  # TABLE: Selected codes
+  # TABLE: Selected codes / Codelist
   output$codes_table <- renderDT({
-    filtered_data() %>%
-      select(code, description) %>%
-      distinct() %>%
-      datatable(
-        colnames = c("Code", "Description"),
-        rownames = FALSE,
-        extensions = c("Buttons", "Scroller"),
-        options = list(
-          columnDefs = list(
-            list(width = "50px", targets = 0),
-            list(width = "500px", targets = 1)
-          ),
-          pageLength = 20,
-          scrollX = TRUE,
-          searching = FALSE,
-          dom = "Bfrtip",
-          buttons = list(
-            "copy",
-            list(
-              extend = "csv",
-              title = paste0("selected_", input$dataset, "_codes")
-            )
-          ),
-          deferRender = TRUE,
-          scrollY = 400,
-          scroller = TRUE
-        )
-      )
+    selected_codes <- filtered_data() |>
+      select(code, description) |>
+      distinct()
+
+    datatable_codelist(selected_codes, data_desc = input$dataset)
   })
 
   # PLOT: Trends over time
   output$usage_plot <- renderPlotly({
-    scale_x_date_breaks <- unique(filtered_data()$start_date)
-    unique_codes <- length(unique(filtered_data()$code))
+    withProgress(message = "Plotting data ...", {
+      unique_codes <- length(unique(filtered_data()$code))
 
-    if (input$show_individual_codes & unique_codes <= 500) {
-      p <- filtered_data() %>%
-        ggplot(
-          aes(
-            x = start_date,
-            y = usage,
-            colour = code
+      if (input$show_individual_codes & unique_codes <= 500) {
+        p <- filtered_data() |>
+          plot_individual()
+      } else {
+        if (input$show_individual_codes & unique_codes >= 500) {
+          showNotification(
+            "Too many codes to show individually. To show individual code usage reduce to 500 or fewer selected codes.",
+            type = "error"
           )
-        ) +
-        geom_line(alpha = .4) +
-        geom_point(
-          size = 2,
-          aes(text = paste0(
-            "<b>Timeframe:</b> ",
-            lubridate::month(start_date, label = TRUE), " ",
-            lubridate::year(start_date), " to ",
-            lubridate::month(end_date, label = TRUE), " ",
-            lubridate::year(end_date),
-            "<br>",
-            "<b>Code:</b> ", code, "<br>",
-            "<b>Description:</b> ", description, "<br>",
-            "<b>Code usage:</b> ", scales::comma(usage)
-          ))
-        ) +
-        scale_x_date(
-          breaks = scale_x_date_breaks,
-          labels = scales::label_date_short()
-        ) +
-        scale_y_continuous(
-          limits = c(0, NA),
-          labels = scales::label_comma()
-        ) +
-        ggplot2::scale_colour_viridis_d() +
-        labs(x = NULL, y = NULL) +
-        theme_classic() +
-        theme(
-          text = element_text(size = 14),
-          legend.position = "none"
-        )
-    } else {
-      p <- filtered_data() %>%
-        group_by(start_date, end_date) %>%
-        summarise(total_usage = sum(usage, na.rm = TRUE)) %>%
-        ggplot(
-          aes(x = start_date, y = total_usage)
-        ) +
-        geom_line(
-          colour = "#239b89ff",
-          alpha = .4
-        ) +
-        geom_point(
-          colour = "#239b89ff",
-          size = 2,
-          aes(text = paste0(
-            "<b>Timeframe:</b> ",
-            lubridate::month(start_date, label = TRUE), " ",
-            lubridate::year(start_date), " to ",
-            lubridate::month(end_date, label = TRUE), " ",
-            lubridate::year(end_date),
-            "<br>",
-            "<b>Code usage:</b> ", scales::comma(total_usage)
-          ))
-        ) +
-        scale_x_date(
-          breaks = scale_x_date_breaks,
-          labels = scales::label_date_short()
-        ) +
-        scale_y_continuous(
-          limits = c(0, NA),
-          labels = scales::label_comma()
-        ) +
-        labs(x = NULL, y = NULL) +
-        theme_classic() +
-        theme(text = element_text(size = 14))
-    }
+        }
 
-    ggplotly(p, tooltip = "text") %>%
-      plotly::config(displayModeBar = FALSE)
+        p <- filtered_data() |>
+          group_by(start_date, end_date) |>
+          summarise(total_usage = sum(usage, na.rm = TRUE)) |>
+          plot_summary()
+      }
+
+      ggplotly(p, tooltip = "text") |>
+        plotly::config(displayModeBar = FALSE)
+    })
   })
 
   # PLOT: Sparkline overview
   output$sparkline <- renderPlotly({
-    data_spark <- filtered_data() %>%
-      group_by(start_date) %>%
-      summarise(total_usage = sum(usage, na.rm = TRUE))
-
-    plotly::plot_ly(data_spark, hoverinfo = "none") %>%
-      plotly::add_lines(
-        x = ~start_date, y = ~total_usage,
-        color = I("black"), span = I(1),
-        fill = "tozeroy", alpha = 0.2
-      ) %>%
-      plotly::layout(
-        xaxis = list(visible = F, showgrid = F, title = ""),
-        yaxis = list(visible = F, showgrid = F, title = ""),
-        hovermode = "x",
-        margin = list(t = 0, r = 0, l = 0, b = 0),
-        font = list(color = "white"),
-        paper_bgcolor = "transparent",
-        plot_bgcolor = "transparent"
-      ) %>%
-      plotly::config(displayModeBar = FALSE) |>
-      layout(xaxis = list(fixedrange = TRUE), yaxis = list(fixedrange = TRUE))
+    data_spark <- filtered_data() |>
+      plot_sparkline()
   })
 }
