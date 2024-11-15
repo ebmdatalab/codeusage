@@ -14,7 +14,19 @@
 #' @import here
 
 app_server <- function(input, output, session) {
-  # DATA: Selected code usage dataset
+  # Reactive values for search method (1)none, (2) code/desc or (3) codelist) and codelist data
+  rv_search_method <- reactiveVal("none")
+  rv_codelist <- reactiveVal(NULL)
+
+  # Reset search inputs when dataset changes
+  observe({
+    rv_search_method("none")
+    updateSelectizeInput(session, "code_search", selected = character(0))
+    updateTextInput(session, "description_search", value = "")
+  }) |>
+    bindEvent(input$dataset)
+
+  # Selected code usage dataset
   selected_data <- reactive({
     if (input$dataset == "snomedct") {
       codeusage::snomed_usage |>
@@ -28,7 +40,7 @@ app_server <- function(input, output, session) {
     }
   })
 
-  # Update choices
+  # Update code search choices depending on selected dataset
   observe({
     updateSelectizeInput(
       session, "code_search",
@@ -37,9 +49,9 @@ app_server <- function(input, output, session) {
     )
   })
 
-  # DATA: OpenCodelist
-  selected_codelist <- reactive({
-    req(input$codelist_slug)
+  # Load codelist
+  observe({
+    req(input$codelist_slug, input$load_codelist)
 
     withProgress(message = "Loading codelist ...", {
       tryCatch(
@@ -51,55 +63,86 @@ app_server <- function(input, output, session) {
               paste0("Successfully loaded ", codelist_s7@coding_system, " codelist."),
               type = "default"
             )
+
+            # Store the codelist data
+            rv_codelist(codelist_s7 |>
+              tibble::as_tibble() |>
+              dplyr::select(1:2))
+
+            # Set filtering method to codelist
+            rv_search_method("codelist")
+
+            # Reset search inputs
+            updateSelectizeInput(session, "code_search", selected = character(0))
+            updateTextInput(session, "description_search", value = "")
           } else {
             showNotification(
               paste0("Loaded codelist (", codelist_s7@coding_system, ") does not match selected data (", input$dataset, ")."),
               type = "error"
             )
           }
-
-
-          codelist_s7 |>
-            tibble::as_tibble() |>
-            dplyr::select(1:2)
         },
         error = function(e) {
           showNotification(
             sprintf("Error loading Codelist: %s", conditionMessage(e)),
             type = "error"
           )
-          NULL
         }
       )
     })
   }) |>
     bindEvent(input$load_codelist)
 
-  # DATA: Filtered usage data
-  
+  # Reset codelist when reset button is clicked
+  observe({
+    req(input$reset_codelist)
+    rv_codelist(NULL)
+    rv_search_method("none")
+    updateTextInput(session, "codelist_slug", value = "")
+    showNotification("Codelist filter has been reset.", type = "default")
+  }) |>
+    bindEvent(input$reset_codelist)
+
+  # Set filtering method to search when search inputs change
+  observe({
+    if (!is.null(input$code_search) && length(input$code_search) > 0 ||
+      !is.null(input$description_search) && input$description_search != "") {
+      rv_search_method("search")
+    } else {
+      rv_search_method("none")
+    }
+  }) |>
+    bindEvent(input$code_search, input$description_search)
+
+  # Filtered usage data
   filtered_data <- reactive({
     req(selected_data())
 
     withProgress(message = "Filtering data ...", {
       data <- selected_data()
 
-      if (!is.null(input$code_search) && length(input$code_search) > 0) {
-        data <- data |>
-          filter(code %in% input$code_search)
-      }
+      # Apply filters based on the current filtering method
+      if (rv_search_method() == "search") {
+        if (!is.null(input$code_search) && length(input$code_search) > 0) {
+          data <- data |>
+            filter(code %in% input$code_search)
+        }
 
-      if (!is.null(input$description_search) && input$description_search != "") {
+        if (!is.null(input$description_search) && input$description_search != "") {
+          data <- data |>
+            filter(grepl(input$description_search, description, ignore.case = TRUE))
+        }
+      } else if (rv_search_method() == "codelist") {
+        req(rv_codelist())
         data <- data |>
-          filter(grepl(input$description_search, description, ignore.case = TRUE))
-      }
-
-      if (!is.null(selected_codelist())) {
-        data <- data |>
-          filter(code %in% selected_codelist()$code)
+          filter(code %in% rv_codelist()$code)
       }
 
       if (nrow(data) == 0) {
-        showNotification("No data matches your current filters.", type = "warning")
+        showNotification(
+          "No data matches your current filters.",
+          type = "warning"
+        )
       }
 
       data
