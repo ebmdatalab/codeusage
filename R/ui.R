@@ -74,7 +74,8 @@ app_ui <- function(request) {
           placeholder = "opensafely/anxiety-disorders/6aef605a",
           NULL
         ),
-        actionButton("load_codelist", "Load codelist", class = "btn-primary")
+        actionButton("load_codelist", "Load codelist", class = "btn-primary"),
+        actionButton("reset_codelist", "Reset codelist", class = "btn-secondary")
       ),
       width = "20%"
     ),
