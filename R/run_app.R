@@ -1,4 +1,4 @@
-#' Interactive tool to explore clinical code usage
+#' Run [Code Usage Explorer](https://milanwiedemann.shinyapps.io/codeusage/) Shiny App
 #'
 #' @export
 run_app <- function() {

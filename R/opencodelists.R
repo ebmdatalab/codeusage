@@ -36,14 +36,25 @@ get_codelist_organisation <- function(codelist_slug) {
   }
 }
 
-#' Get codelist from OpenCodelists
+#' Get codelist from [OpenCodelists](https://www.opencodelists.org)
 #'
 #' @param codelist_slug String, specifying the slug of the codelist.
 #' The naming convention of the codelist slug follows this structure: a `<codelist-id>` is followed by / and a `<version-id>`.
 #' Note that the version ID is a sequence of 8 characters.
 #' Some codelists may also have a version tag in the form of a date (YYYY-MM-DD) or a version number (e.g., v1.2) that can be used in place of the version ID.
 #' @export
-#'
+#' @examples
+#' # Get the 'cpeptide_cod' codelist from OpenCodelists.org
+#' cpeptide_cod <- get_codelist("nhsd-primary-care-domain-refsets/cpeptide_cod/20200812/")
+#' 
+#' # Return all codes
+#' cpeptide_cod$code
+#' 
+#' # Return 'coding_system' of codelist
+#' cpeptide_cod@coding_system
+#' 
+#' # Return 'full_slug' of codelist
+#' cpeptide_cod@full_slug
 get_codelist <- function(codelist_slug) {
   codelist_slug <- sub("/$", "", codelist_slug)
   url_api_base <- "https://www.opencodelists.org/api/v1/codelist/"
