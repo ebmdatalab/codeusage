@@ -2,7 +2,7 @@
 % Please edit documentation in R/opencodelists.R
 \name{get_codelist}
 \alias{get_codelist}
-\title{Get codelist from OpenCodelists}
+\title{Get codelist from \href{https://www.opencodelists.org}{OpenCodelists}}
 \usage{
 get_codelist(codelist_slug)
 }
@@ -13,5 +13,18 @@ Note that the version ID is a sequence of 8 characters.
 Some codelists may also have a version tag in the form of a date (YYYY-MM-DD) or a version number (e.g., v1.2) that can be used in place of the version ID.}
 }
 \description{
-Get codelist from OpenCodelists
+Get codelist from \href{https://www.opencodelists.org}{OpenCodelists}
+}
+\examples{
+# Get the 'cpeptide_cod' codelist from OpenCodelists.org
+cpeptide_cod <- get_codelist("nhsd-primary-care-domain-refsets/cpeptide_cod/20200812/")
+
+# Return all codes
+cpeptide_cod$code
+
+# Return 'coding_system' of codelist
+cpeptide_cod@coding_system
+
+# Return 'full_slug' of codelist
+cpeptide_cod@full_slug
 }

@@ -3,7 +3,7 @@
 \docType{data}
 \name{opcs_usage}
 \alias{opcs_usage}
-\title{OPCS Code Usage from Hospital Admitted Patient Care Activity in England}
+\title{Yearly OPCS Code Usage from Hospital Admitted Patient Care Activity in England}
 \format{
 A data frame with 107,376 rows and 5 columns:
 \describe{

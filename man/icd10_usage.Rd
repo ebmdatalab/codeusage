@@ -3,7 +3,7 @@
 \docType{data}
 \name{icd10_usage}
 \alias{icd10_usage}
-\title{ICD-10 Code Usage from Hospital Admitted Patient Care Activity in England}
+\title{Yearly ICD-10 Code Usage from Hospital Admitted Patient Care Activity in England}
 \format{
 A data frame with 135,951 rows and 5 columns:
 \describe{

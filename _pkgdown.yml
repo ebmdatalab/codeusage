@@ -2,3 +2,15 @@ url: https://ebmdatalab.github.io/codeusage/
 template:
   bootstrap: 5
 
+reference:
+- title: Datasets
+  contents:
+  - snomed_usage
+  - icd10_usage
+  - opcs_usage
+- title: Codelists
+  contents:
+  - get_codelist
+- title: Shiny App
+  contents:
+  - run_app

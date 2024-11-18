@@ -2,10 +2,10 @@
 % Please edit documentation in R/run_app.R
 \name{run_app}
 \alias{run_app}
-\title{Interactive tool to explore clinical code usage}
+\title{Run \href{https://milanwiedemann.shinyapps.io/codeusage/}{Code Usage Explorer} Shiny App}
 \usage{
 run_app()
 }
 \description{
-Interactive tool to explore clinical code usage
+Run \href{https://milanwiedemann.shinyapps.io/codeusage/}{Code Usage Explorer} Shiny App
 }
