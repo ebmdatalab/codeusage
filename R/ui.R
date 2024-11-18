@@ -16,12 +16,26 @@ app_ui <- function(request) {
     title = "Code Usage Explorer",
     sidebar = sidebar(
       card(
-        card_header("Select dataset"),
+        card_header(
+          tooltip(
+            span(
+              "Select dataset",
+              bs_icon("info-circle")
+            ),
+            "SNOMED CT (Systematized Nomenclature of Medicine Clinical Terms); ICD (International Classification of Diseases); OPCS Classification of Interventions and Procedures",
+            options = list(
+              customClass = "left-align-tooltip"
+            )
+          )
+        ),
         radioButtons("dataset", NULL,
           choices = c(
+            # Systematized Nomenclature of Medicine Clinical Terms (SNOMED CT)
             "SNOMED-CT" = "snomedct",
+            # International Classification of Diseases (ICD)
             "ICD-10" = "icd10",
-            "OPCS" = "opcs"
+            # OPCS Classification of Interventions and Procedures (OPCS)
+            "OPCS" = "opcs4"
           )
         )
       ),
@@ -50,7 +64,7 @@ app_ui <- function(request) {
               "Description",
               bs_icon("info-circle")
             ),
-            "Enter search term(s). Multiple terms can be combined by using '|' e.g., 'anxiety|depression'",
+            "Enter search term(s). Multiple terms can be combined by using '|'.",
             options = list(
               customClass = "left-align-tooltip"
             )

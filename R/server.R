@@ -34,7 +34,7 @@ app_server <- function(input, output, session) {
     } else if (input$dataset == "icd10") {
       codeusage::icd10_usage |>
         select(start_date, end_date, code = icd10_code, description, usage)
-    } else if (input$dataset == "opcs") {
+    } else if (input$dataset == "opcs4") {
       codeusage::opcs_usage |>
         select(start_date, end_date, code = opcs_code, description, usage)
     }
