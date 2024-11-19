@@ -9,3 +9,5 @@
 ^pkgdown$
 ^app.R$
 ^rsconnect$
+^doc$
+^Meta$
