@@ -9,7 +9,7 @@
 #' @import ggplot2
 #' @importFrom scales comma label_date_short label_comma
 #' @importFrom lubridate month year
-#' @importFrom DT renderDT datatable
+#' @importFrom DT renderDT
 #' @importFrom plotly renderPlotly ggplotly plot_ly config add_lines layout
 #' @import here
 
@@ -161,7 +161,11 @@ app_server <- function(input, output, session) {
   # TABLE: Code usage
   output$usage_table <- renderDT({
     filtered_data() |>
-      select(-end_date) |>
+      group_by(code, description) |>
+      summarise(total_usage = sum(usage, na.rm = TRUE)) |>
+      ungroup() |>
+      mutate(total_pct = total_usage / sum(total_usage, na.rm = TRUE)) |>
+      arrange(desc(total_usage)) |>
       datatable_usage()
   })
 
