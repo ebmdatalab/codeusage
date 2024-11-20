@@ -46,13 +46,13 @@ get_codelist_organisation <- function(codelist_slug) {
 #' @examples
 #' # Get the 'cpeptide_cod' codelist from OpenCodelists.org
 #' cpeptide_cod <- get_codelist("nhsd-primary-care-domain-refsets/cpeptide_cod/20200812/")
-#' 
+#'
 #' # Return all codes
 #' cpeptide_cod$code
-#' 
+#'
 #' # Return 'coding_system' of codelist
 #' cpeptide_cod@coding_system
-#' 
+#'
 #' # Return 'full_slug' of codelist
 #' cpeptide_cod@full_slug
 get_codelist <- function(codelist_slug) {
