@@ -22,7 +22,7 @@ NULL
 #' # Filter for code usage records from 2022-08-01 onwards
 #' snomed_usage |>
 #'   dplyr::filter(start_date >= "2022-08-1")
-#' 
+#'
 #' # Filter for code usage records from 2022-08-01 onwards
 #' # where the description contains the word "anxiety"
 #' snomed_usage |>
