@@ -47,6 +47,15 @@ plot_summary <- function(data) {
 #' @keywords internal
 plot_individual <- function(data) {
   scale_x_date_breaks <- unique(data$start_date)
+  
+  data <- data |>
+    group_by(start_date, end_date) |>
+    summarise(
+      code = code,
+      description = description,
+      usage = usage,
+      annual_proportion = round(usage/sum(usage) * 100, 2))
+    
 
   ggplot(
     data,
@@ -68,7 +77,8 @@ plot_individual <- function(data) {
         "<br>",
         "<b>Code:</b> ", code, "<br>",
         "<b>Description:</b> ", description, "<br>",
-        "<b>Code usage:</b> ", scales::comma(usage)
+        "<b>Code usage:</b> ", scales::comma(usage), "<br>",
+        "<b>Proportion of annual usage: </b>", annual_proportion, "%" 
       ))
     ) +
     scale_x_date(
