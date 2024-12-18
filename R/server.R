@@ -30,7 +30,7 @@ app_server <- function(input, output, session) {
   selected_data <- reactive({
     if (input$dataset == "snomedct") {
       codeusage::snomed_usage |>
-        select(start_date, end_date, code = snomed_concept_id, description, usage)
+        select(start_date, end_date, code = snomed_code, description, usage)
     } else if (input$dataset == "icd10") {
       codeusage::icd10_usage |>
         select(start_date, end_date, code = icd10_code, description, usage)

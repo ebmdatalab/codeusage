@@ -7,7 +7,7 @@ test_that("Test snomed_usage column names", {
     c(
       "start_date",
       "end_date",
-      "snomed_concept_id",
+      "snomed_code",
       "description",
       "usage",
       "active_at_start",
@@ -20,7 +20,7 @@ test_that("Test snomed_usage column names", {
 test_that("Test snomed_usage column types", {
   expect_s3_class(snomed_usage$start_date, "Date")
   expect_s3_class(snomed_usage$end_date, "Date")
-  expect_type(snomed_usage$snomed_concept_id, "character")
+  expect_type(snomed_usage$snomed_code, "character")
   expect_type(snomed_usage$description, "character")
   expect_type(snomed_usage$usage, "integer")
   expect_type(snomed_usage$active_at_start, "logical")
@@ -96,7 +96,7 @@ test_that("Test ICD-10 usage are all integers", {
   expect_equal(test_sum_non_integers, 0)
 })
 
-# OPCS Tests
+# OPCS-4 Tests
 
 test_that("Test opcs_usage column types", {
   expect_s3_class(opcs_usage$start_date, "Date")
@@ -130,7 +130,7 @@ test_that("Test opcs_usage minimum usage", {
   expect_equal(test_min_usage, 1)
 })
 
-test_that("Test OPCS usage are all integers", {
+test_that("Test OPCS-4 usage are all integers", {
   test_sum_non_integers <- sum(!is.integer(opcs_usage$usage))
   expect_equal(test_sum_non_integers, 0)
 })

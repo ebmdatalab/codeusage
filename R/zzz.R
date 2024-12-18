@@ -5,7 +5,7 @@
 utils::globalVariables(c(
   "start_date",
   "end_date",
-  "snomed_concept_id",
+  "snomed_code",
   "description",
   "usage",
   "icd10_code",

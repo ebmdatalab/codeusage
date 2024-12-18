@@ -21,12 +21,12 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-The goal of `codeusage` is to make yearly summaries of **SNOMED Code Usage in Primary Care** and **ICD-10 and OPCS Code Usage in Secondary Care** in England, published by NHS Digital, available in R for research.
+The goal of `codeusage` is to make yearly summaries of **SNOMED Code Usage in Primary Care** and **ICD-10 and OPCS-4 Code Usage in Secondary Care** in England, published by NHS Digital, available in R for research.
 The interactive [Code Usage Explorer](https://milanwiedemann.shinyapps.io/codeusage/) dashboard provides different options to explore these datasets.  
 The original data is available from NHS Digital at:
 
 -   [SNOMED Code Usage in Primary Care](https://digital.nhs.uk/data-and-information/publications/statistical/mi-snomed-code-usage-in-primary-care)
--   [ICD-10 and OPCS Code Usage in Secondary Care](https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity)
+-   [ICD-10 and OPCS-4 Code Usage in Secondary Care](https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity)
 
 ## Installation
 
@@ -63,13 +63,13 @@ This is only a selection of the full dataset published by NHS Digital, for the d
 icd10_usage
 ```
 
-### Dataset: OPCS Code Usage in Secondary Care in England
+### Dataset: OPCS-4 Code Usage in Secondary Care in England
 
-This is the total annual count of each instance that each 4-character OPCS code is listed across all primary and secondary procedure positions in the Finished Consultant Episodes (FCE) of the Hospital Episode Statistics in England.
+This is the total annual count of each instance that each 4-character OPCS-4 code is listed across all primary and secondary procedure positions in the Finished Consultant Episodes (FCE) of the Hospital Episode Statistics in England.
 
 This is only a selection of the full dataset published by NHS Digital, for the data pre-processing see `/data-raw/opcs_usage.R`.
 
-```{r opcs-usage}
-# Return OPCS code usage data
+```{r OPCS-4-usage}
+# Return OPCS-4 code usage data
 opcs_usage
 ```

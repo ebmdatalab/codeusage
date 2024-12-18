@@ -9,7 +9,7 @@ NULL
 #' \describe{
 #'   \item{start_date}{Start date of code usage count}
 #'   \item{end_date}{End date of code usage count}
-#'   \item{snomed_concept_id}{SNOMED Concept ID}
+#'   \item{snomed_code}{SNOMED Concept ID}
 #'   \item{usage}{Yearly summary of code usage.
 #'   Note that counts are rounded to the nearest 10.
 #'   Counts of 5 or below are displayed as 5.}
@@ -60,19 +60,19 @@ NULL
 #' dplyr:: filter(icd10_code %in% codelist$code) 
 "icd10_usage"
 
-#' Yearly OPCS Code Usage from Hospital Admitted Patient Care Activity in England
+#' Yearly OPCS-4 Code Usage from Hospital Admitted Patient Care Activity in England
 #'
-#' Yearly summary of 4-character OPCS code usage from 1st April 2013 to 31st March 2024.
+#' Yearly summary of 4-character OPCS-4 code usage from 1st April 2013 to 31st March 2024.
 #' The code usage represents the total annual count of each procedure, recorded across the primary and the secondary procedure positions.
 #' Restricted codes for which annual usage is not published have been removed.
 #' @format A data frame with 107,376 rows and 5 columns:
 #' \describe{
 #'   \item{start_date}{Start date of code usage count}
 #'   \item{end_date}{End date of code usage count}
-#'   \item{opcs_code}{The 4-character OPCS code.
+#'   \item{opcs_code}{The 4-character OPCS-4 code.
 #'   Note that the punctuation from the code has been removed for compatibility with OpenCodelists.}
 #'   \item{usage}{Annual count of code usage.}
-#'   \item{description}{Description of the OPCS Code}
+#'   \item{description}{Description of the OPCS-4 Code}
 #' }
 #' @source <https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity>
 #' @examples

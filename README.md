@@ -10,7 +10,7 @@
 <!-- badges: end -->
 
 The goal of `codeusage` is to make yearly summaries of **SNOMED Code
-Usage in Primary Care** and **ICD-10 and OPCS Code Usage in Secondary
+Usage in Primary Care** and **ICD-10 and OPCS-4 Code Usage in Secondary
 Care** in England, published by NHS Digital, available in R for
 research. The interactive [Code Usage
 Explorer](https://milanwiedemann.shinyapps.io/codeusage/) dashboard
@@ -19,7 +19,7 @@ The original data is available from NHS Digital at:
 
 - [SNOMED Code Usage in Primary
   Care](https://digital.nhs.uk/data-and-information/publications/statistical/mi-snomed-code-usage-in-primary-care)
-- [ICD-10 and OPCS Code Usage in Secondary
+- [ICD-10 and OPCS-4 Code Usage in Secondary
   Care](https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity)
 
 ## Installation
@@ -46,7 +46,7 @@ for the data pre-processing see `/data-raw/snomed_code_usage.R`.
 # Return SNOMED code usage data
 snomed_usage
 #> # A tibble: 1,523,967 × 7
-#>    start_date end_date   snomed_concept_id description     usage active_at_start
+#>    start_date end_date   snomed_code description     usage active_at_start
 #>    <date>     <date>     <chr>             <chr>           <int> <lgl>          
 #>  1 2023-08-01 2024-07-31 279991000000102   Short message… 4.41e8 TRUE           
 #>  2 2023-08-01 2024-07-31 184103008         Patient telep… 1.91e8 TRUE           
@@ -90,10 +90,10 @@ icd10_usage
 #> # ℹ 135,941 more rows
 ```
 
-### Dataset: OPCS Code Usage in Secondary Care in England
+### Dataset: OPCS-4 Code Usage in Secondary Care in England
 
 This is the total annual count of each instance that each 4-character
-OPCS code is listed across all primary and secondary procedure positions
+OPCS-4 code is listed across all primary and secondary procedure positions
 in the Finished Consultant Episodes (FCE) of the Hospital Episode
 Statistics in England.
 
@@ -101,7 +101,7 @@ This is only a selection of the full dataset published by NHS Digital,
 for the data pre-processing see `/data-raw/opcs_usage.R`.
 
 ``` r
-# Return OPCS code usage data
+# Return OPCS-4 code usage data
 opcs_usage
 #> # A tibble: 107,376 × 5
 #>    start_date end_date   opcs_code description                             usage

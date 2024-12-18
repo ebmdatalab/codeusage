@@ -22,7 +22,7 @@ app_ui <- function(request) {
               "Select dataset",
               bs_icon("info-circle")
             ),
-            "SNOMED CT (Systematized Nomenclature of Medicine Clinical Terms); ICD (International Classification of Diseases); OPCS Classification of Interventions and Procedures",
+            "SNOMED CT (Systematized Nomenclature of Medicine Clinical Terms); ICD-10 (International Classification of Diseases); OPCS-4 Classification of Interventions and Procedures",
             options = list(
               customClass = "left-align-tooltip"
             )
@@ -32,10 +32,10 @@ app_ui <- function(request) {
           choices = c(
             # Systematized Nomenclature of Medicine Clinical Terms (SNOMED CT)
             "SNOMED-CT" = "snomedct",
-            # International Classification of Diseases (ICD)
+            # International Classification of Diseases (ICD-10)
             "ICD-10" = "icd10",
-            # OPCS Classification of Interventions and Procedures (OPCS)
-            "OPCS" = "opcs4"
+            # OPCS-4 Classification of Interventions and Procedures (OPCS-4)
+            "OPCS-4" = "opcs4"
           )
         )
       ),

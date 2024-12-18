@@ -28,19 +28,19 @@ snomed_code_usage_urls <- list(
 # Data dictionary from SNOMED_code_usage_metadata.xlsx
 # https://files.digital.nhs.uk/31/097702/SNOMED_code_usage_metadata.xlsx
 
-# * SNOMED_Concept_ID (Text string of digits up to 18 characters long)
+# * snomed_code (Text string of digits up to 18 characters long)
 #   SNOMED concepts which have been added to a patient record in a general practice system during the reporting period.
 # * Description (Text string)
-#   The fully specified name associated with the SNOMED_Concept_ID on the final day of the reporting period (31 July).
+#   The fully specified name associated with the snomed_code on the final day of the reporting period (31 July).
 # * Usage (Numeric (integer) or *)
-#   The number of times that the SNOMED_Concept_ID was added into any patient record within the reporting period, rounded to the nearerst 10.
+#   The number of times that the snomed_code was added into any patient record within the reporting period, rounded to the nearerst 10.
 #   Usage of 1 to 4 is displayed as *.
 # * Active_at_Start
-#   Active status of the SNOMED_Concept_ID on the first day of the reporting period.
+#   Active status of the snomed_code on the first day of the reporting period.
 #   This is taken from the most recent UK clinical extension, or associated International extention, which was published up to the start of the reporting year (1 August).
 #   1 = SNOMED concept was published and was active (active = 1).
 #   0 = SNOMED concept was either not yet available or was inactive (active = 0).
-# * Active_at_End	"Active status of the SNOMED_Concept_ID on the first day of the reporting period.
+# * Active_at_End	"Active status of the snomed_code on the first day of the reporting period.
 #   This is taken from the most recent UK clinical extension, or associated International extention, which was published up to the end of the reporting year (31 July).
 #   1 = SNOMED concept was published and was active (active = 1).
 #   0 = SNOMED concept was either not yet available or was inactive (active = 0).
@@ -49,7 +49,7 @@ snomed_code_usage_urls <- list(
 snomed_usage <- snomed_code_usage_urls %>%
   map(read_tsv,
     col_types = list(
-      SNOMED_Concept_ID = "c",
+      snomed_code = "c",
       Description = "c",
       Usage = "i",
       Active_at_Start = "l",
@@ -64,6 +64,11 @@ snomed_usage <- snomed_code_usage_urls %>%
     end_date = as.Date(paste0(end_date, "-07-31")),
     usage = replace_na(usage, 5)
   )
+
+# Manipulation required due to variable name change
+snomed_usage <- snomed_usage |>
+  rename(snomed_code = snomed_concept_id)|>
+  mutate(snomed_code = as.character(snomed_code))
 
 usethis::use_data(
   snomed_usage,
