@@ -9,7 +9,7 @@ A data frame with 1,366,513 rows and 6 columns:
 \describe{
 \item{start_date}{Start date of code usage count}
 \item{end_date}{End date of code usage count}
-\item{snomed_concept_id}{SNOMED Concept ID}
+\item{snomed_code}{SNOMED Concept ID}
 \item{usage}{Yearly summary of code usage.
 Note that counts are rounded to the nearest 10.
 Counts of 5 or below are displayed as 5.}
