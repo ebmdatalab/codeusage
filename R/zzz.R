@@ -3,6 +3,7 @@
 }
 
 utils::globalVariables(c(
+  "annual_proportion",
   "start_date",
   "end_date",
   "snomed_code",
