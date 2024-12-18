@@ -98,13 +98,13 @@ in the Finished Consultant Episodes (FCE) of the Hospital Episode
 Statistics in England.
 
 This is only a selection of the full dataset published by NHS Digital,
-for the data pre-processing see `/data-raw/opcs_usage.R`.
+for the data pre-processing see `/data-raw/opcs4_usage.R`.
 
 ``` r
 # Return OPCS-4 code usage data
-opcs_usage
+opcs4_usage
 #> # A tibble: 107,376 × 5
-#>    start_date end_date   opcs_code description                             usage
+#>    start_date end_date   opcs4_code description                             usage
 #>    <date>     <date>     <chr>     <chr>                                   <int>
 #>  1 2023-04-01 2024-03-31 A011      Hemispherectomy                             7
 #>  2 2023-04-01 2024-03-31 A012      Total lobectomy of brain                   36

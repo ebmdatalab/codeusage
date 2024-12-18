@@ -5,7 +5,7 @@ library(httr)
 
 url_start <- "https://files.digital.nhs.uk/"
 
-opcs_code_usage_urls <- list(
+opcs4_code_usage_urls <- list(
   "fy23to24" = list(
     url = paste0(url_start, "92/DB66C9/hosp-epis-stat-admi-proc-2023-24-tab-v2.xlsx"),
     sheet = 6,
@@ -81,7 +81,7 @@ opcs_code_usage_urls <- list(
 )
 
 # Function to download and read the xlsx files
-read_opcs_usage_xlsx_from_url <- function(url_list, ...) {
+read_opcs4_usage_xlsx_from_url <- function(url_list, ...) {
   temp_file <- tempfile(fileext = ".xlsx")
   GET(
     url_list$url,
@@ -101,7 +101,7 @@ read_opcs_usage_xlsx_from_url <- function(url_list, ...) {
 select_all_diag_counts <- function(data, url_list) {
   dplyr::select(
     data,
-    opcs_code = 1,
+    opcs4_code = 1,
     description = 2,
     usage = url_list$usage_col
   ) |>
@@ -111,13 +111,13 @@ select_all_diag_counts <- function(data, url_list) {
 }
 
 # Combine both functions
-get_opcs_data <- function(url_list, ...) {
-  df_temp <- read_opcs_usage_xlsx_from_url(url_list, ...)
+get_opcs4_data <- function(url_list, ...) {
+  df_temp <- read_opcs4_usage_xlsx_from_url(url_list, ...)
   select_all_diag_counts(df_temp, url_list)
 }
 
-opcs_usage <- opcs_code_usage_urls |>
-  map(get_opcs_data) |>
+opcs4_usage <- opcs4_code_usage_urls |>
+  map(get_opcs4_data) |>
   bind_rows(.id = "nhs_fy") |>
   separate(nhs_fy, c("start_date", "end_date"), "to") |>
   mutate(
@@ -127,12 +127,12 @@ opcs_usage <- opcs_code_usage_urls |>
     end_date = as.Date(
       paste0("20", str_extract_all(end_date, "\\d+"), "-03-31")
     ),
-    opcs_code = str_replace_all(opcs_code, "\\.", "")
+    opcs4_code = str_replace_all(opcs4_code, "\\.", "")
   ) |>
   filter(!is.na(usage))
 
 usethis::use_data(
-  opcs_usage,
+  opcs4_usage,
   compress = "bzip2",
   overwrite = TRUE
 )

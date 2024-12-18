@@ -10,7 +10,7 @@ utils::globalVariables(c(
   "description",
   "usage",
   "icd10_code",
-  "opcs_code",
+  "opcs4_code",
   "total_usage",
   "full_slug"
 ))

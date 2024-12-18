@@ -7,7 +7,7 @@ reference:
   contents:
   - snomed_usage
   - icd10_usage
-  - opcs_usage
+  - opcs4_usage
 - title: Codelists
   contents:
   - get_codelist

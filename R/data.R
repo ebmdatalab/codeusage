@@ -70,7 +70,7 @@ NULL
 #' \describe{
 #'   \item{start_date}{Start date of code usage count}
 #'   \item{end_date}{End date of code usage count}
-#'   \item{opcs_code}{The 4-character OPCS-4 code.
+#'   \item{opcs4_code}{The 4-character OPCS-4 code.
 #'   Note that the punctuation from the code has been removed for compatibility with OpenCodelists.}
 #'   \item{usage}{Annual count of code usage.}
 #'   \item{description}{Description of the OPCS-4 Code}
@@ -78,6 +78,6 @@ NULL
 #' @source <https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity>
 #' @examples
 #' # Filter to procedures involving "biopsy" after March 2020 (note each year runs April - March).
-#' opcs_usage |>
+#' opcs4_usage |>
 #' dplyr:: filter(grepl("biopsy", description, ignore.case = TRUE) & lubridate:: year(end_date) > 2020)
-"opcs_usage"
+"opcs4_usage"
