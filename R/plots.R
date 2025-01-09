@@ -54,7 +54,7 @@ plot_individual <- function(data) {
       code = code,
       description = description,
       usage = usage,
-      annual_proportion = round(usage/sum(usage) * 100, 2))
+      annual_proportion = round(usage / sum(usage, na.rm = TRUE) * 100, 2))
     
 
   ggplot(
