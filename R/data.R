@@ -35,6 +35,9 @@ NULL
 #' Yearly summary of 4-character ICD-10 code usage from 1st April 2013 to 31st March 2024.
 #' The code usage represents the annual count of all episodes which record the given ICD-10 code in any primary or secondary position.
 #' Restricted codes for which annual usage is not published have been removed.
+#' Yearly summary of 4-character ICD-10 code usage from 1st April 2013 to 31st March 2024.
+#' The code usage represents the annual count of all episodes which record the given ICD-10 code in any primary or secondary position.
+#' Restricted codes for which annual usage is not published have been removed.
 #' @format A data frame with 135,951 rows and 5 columns:
 #' \describe{
 #'   \item{start_date}{Start date of code usage count}
@@ -43,8 +46,24 @@ NULL
 #'   Note that the punctuation from the code has been removed for compatibility with OpenCodelists.}
 #'   \item{usage}{Annual count of code usage.}
 #'   \item{description}{Description of the ICD-10 Code}
+#'   \item{usage}{Annual count of code usage.}
+#'   \item{description}{Description of the ICD-10 Code}
 #' }
 #' @source <https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity>
+#' @examples
+#' # Filter to codes in the ICD-10 Chapter XIX: "Injury, poisoning..." 
+#' # (codes begin with letters "S" or "T"), with usage > 10,000.
+#' # For each of these, select the year with the highest count. 
+#' icd10_usage |>
+#' dplyr:: filter(grepl("^[ST]", icd10_code) & usage > 10000)|>
+#' dplyr:: group_by(description) |>
+#' dplyr:: slice_max(usage)
+#' # Filter to codes present in the CPRD Aurum ICD-10 pregnancy codelist.
+#' # This codelist is available in OpenCodelists.org
+#' codelist<- read.csv(
+#' "https://www.opencodelists.org/codelist/opensafely/pregnancy-icd10-aurum/5a7d8d12/download.csv")
+#' icd10_usage |>
+#' dplyr:: filter(icd10_code %in% codelist$code) 
 #' @examples
 #' # Filter to codes in the ICD-10 Chapter XIX: "Injury, poisoning..." 
 #' # (codes begin with letters "S" or "T"), with usage > 10,000.

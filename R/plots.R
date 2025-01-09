@@ -54,7 +54,7 @@ plot_individual <- function(data) {
       code = code,
       description = description,
       usage = usage,
-      annual_proportion = round(usage/sum(usage) * 100, 2))
+      annual_proportion = usage / sum(usage, na.rm = TRUE))
     
 
   ggplot(
@@ -78,7 +78,7 @@ plot_individual <- function(data) {
         "<b>Code:</b> ", code, "<br>",
         "<b>Description:</b> ", description, "<br>",
         "<b>Code usage:</b> ", scales::comma(usage), "<br>",
-        "<b>Proportion of annual usage: </b>", annual_proportion, "%" 
+        "<b>Proportion of annual usage: </b>", scales::percent(annual_proportion, accuracy = 0.01)
       ))
     ) +
     scale_x_date(
