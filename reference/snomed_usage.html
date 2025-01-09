@@ -56,7 +56,7 @@ The variables in this dataset include:</p>
 <dt>end_date</dt>
 <dd><p>End date of code usage count</p></dd>
 
-<dt>snomed_concept_id</dt>
+<dt>snomed_code</dt>
 <dd><p>SNOMED Concept ID</p></dd>
 
 <dt>usage</dt>
@@ -86,18 +86,18 @@ Counts of 5 or below are displayed as 5.</p></dd>
 <span class="r-in"><span><span class="va">snomed_usage</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">start_date</span> <span class="op">&gt;=</span> <span class="st">"2022-08-1"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 306,888 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    start_date end_date   snomed_concept_id description     usage active_at_start</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2023-08-01 2024-07-31 279991000000102   Short message… 4.41<span style="color: #949494;">e</span>8 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2023-08-01 2024-07-31 184103008         Patient telep… 1.91<span style="color: #949494;">e</span>8 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2023-08-01 2024-07-31 428481002         Patient mobil… 1.16<span style="color: #949494;">e</span>8 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2023-08-01 2024-07-31 423876004         Clinical docu… 7.81<span style="color: #949494;">e</span>7 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2023-08-01 2024-07-31 72313002          Systolic arte… 6.87<span style="color: #949494;">e</span>7 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2023-08-01 2024-07-31 1091811000000102  Diastolic art… 6.87<span style="color: #949494;">e</span>7 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2023-08-01 2024-07-31 1000731000000107  Serum creatin… 4.82<span style="color: #949494;">e</span>7 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2023-08-01 2024-07-31 60621009          Body mass ind… 4.65<span style="color: #949494;">e</span>7 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2023-08-01 2024-07-31 1000661000000107  Serum sodium … 4.63<span style="color: #949494;">e</span>7 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2023-08-01 2024-07-31 1000651000000109  Serum potassi… 4.62<span style="color: #949494;">e</span>7 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    start_date end_date   snomed_code      description      usage active_at_start</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2023-08-01 2024-07-31 279991000000102  Short message … 4.41<span style="color: #949494;">e</span>8 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2023-08-01 2024-07-31 184103008        Patient teleph… 1.91<span style="color: #949494;">e</span>8 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2023-08-01 2024-07-31 428481002        Patient mobile… 1.16<span style="color: #949494;">e</span>8 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2023-08-01 2024-07-31 423876004        Clinical docum… 7.81<span style="color: #949494;">e</span>7 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2023-08-01 2024-07-31 72313002         Systolic arter… 6.87<span style="color: #949494;">e</span>7 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2023-08-01 2024-07-31 1091811000000102 Diastolic arte… 6.87<span style="color: #949494;">e</span>7 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2023-08-01 2024-07-31 1000731000000107 Serum creatini… 4.82<span style="color: #949494;">e</span>7 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2023-08-01 2024-07-31 60621009         Body mass inde… 4.65<span style="color: #949494;">e</span>7 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2023-08-01 2024-07-31 1000661000000107 Serum sodium l… 4.63<span style="color: #949494;">e</span>7 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2023-08-01 2024-07-31 1000651000000109 Serum potassiu… 4.62<span style="color: #949494;">e</span>7 TRUE           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 306,878 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: active_at_end &lt;lgl&gt;</span></span>
 <span class="r-in"><span></span></span>
@@ -107,18 +107,18 @@ Counts of 5 or below are displayed as 5.</p></dd>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">start_date</span> <span class="op">&gt;=</span> <span class="st">"2022-08-1"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"anxiety"</span>, <span class="va">description</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 326 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    start_date end_date   snomed_concept_id description     usage active_at_start</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2023-08-01 2024-07-31 231504006         Mixed anxiety… 2.38<span style="color: #949494;">e</span>6 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2023-08-01 2024-07-31 197480006         Anxiety disor… 1.22<span style="color: #949494;">e</span>6 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2023-08-01 2024-07-31 445455005         Generalized A… 1.01<span style="color: #949494;">e</span>6 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2023-08-01 2024-07-31 198288003         Anxiety state… 5.23<span style="color: #949494;">e</span>5 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2023-08-01 2024-07-31 836571000000106   Generalised a… 5.02<span style="color: #949494;">e</span>5 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2023-08-01 2024-07-31 48694002          Anxiety (find… 5.00<span style="color: #949494;">e</span>5 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2023-08-01 2024-07-31 21897009          Generalized a… 1.46<span style="color: #949494;">e</span>5 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2023-08-01 2024-07-31 908501000000101   Anxiety scree… 8.86<span style="color: #949494;">e</span>4 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2023-08-01 2024-07-31 286644009         Level of anxi… 6.72<span style="color: #949494;">e</span>4 TRUE           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2023-08-01 2024-07-31 401320004         Hospital Anxi… 4.42<span style="color: #949494;">e</span>4 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    start_date end_date   snomed_code     description       usage active_at_start</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2023-08-01 2024-07-31 231504006       Mixed anxiety a… 2.38<span style="color: #949494;">e</span>6 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2023-08-01 2024-07-31 197480006       Anxiety disorde… 1.22<span style="color: #949494;">e</span>6 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2023-08-01 2024-07-31 445455005       Generalized Anx… 1.01<span style="color: #949494;">e</span>6 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2023-08-01 2024-07-31 198288003       Anxiety state (… 5.23<span style="color: #949494;">e</span>5 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2023-08-01 2024-07-31 836571000000106 Generalised anx… 5.02<span style="color: #949494;">e</span>5 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2023-08-01 2024-07-31 48694002        Anxiety (findin… 5.00<span style="color: #949494;">e</span>5 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2023-08-01 2024-07-31 21897009        Generalized anx… 1.46<span style="color: #949494;">e</span>5 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2023-08-01 2024-07-31 908501000000101 Anxiety screeni… 8.86<span style="color: #949494;">e</span>4 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2023-08-01 2024-07-31 286644009       Level of anxiet… 6.72<span style="color: #949494;">e</span>4 TRUE           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2023-08-01 2024-07-31 401320004       Hospital Anxiet… 4.42<span style="color: #949494;">e</span>4 TRUE           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 316 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: active_at_end &lt;lgl&gt;</span></span>
 </code></pre></div>

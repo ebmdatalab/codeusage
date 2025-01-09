@@ -57,11 +57,11 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>The goal of <code>codeusage</code> is to make yearly summaries of <strong>SNOMED Code Usage in Primary Care</strong> and <strong>ICD-10 and OPCS Code Usage in Secondary Care</strong> in England, published by NHS Digital, available in R for research. The interactive <a href="https://milanwiedemann.shinyapps.io/codeusage/" class="external-link">Code Usage Explorer</a> dashboard provides different options to explore these datasets.<br>
+<p>The goal of <code>codeusage</code> is to make yearly summaries of <strong>SNOMED Code Usage in Primary Care</strong> and <strong>ICD-10 and OPCS-4 Code Usage in Secondary Care</strong> in England, published by NHS Digital, available in R for research. The interactive <a href="https://milanwiedemann.shinyapps.io/codeusage/" class="external-link">Code Usage Explorer</a> dashboard provides different options to explore these datasets.<br>
 The original data is available from NHS Digital at:</p>
 <ul>
 <li><a href="https://digital.nhs.uk/data-and-information/publications/statistical/mi-snomed-code-usage-in-primary-care" class="external-link">SNOMED Code Usage in Primary Care</a></li>
-<li><a href="https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity" class="external-link">ICD-10 and OPCS Code Usage in Secondary Care</a></li>
+<li><a href="https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity" class="external-link">ICD-10 and OPCS-4 Code Usage in Secondary Care</a></li>
 </ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -84,7 +84,7 @@ The original data is available from NHS Digital at:</p>
 <code class="sourceCode R"><span><span class="co"># Return SNOMED code usage data</span></span>
 <span><span class="va">snomed_usage</span></span>
 <span><span class="co">#&gt; # A tibble: 1,523,967 × 7</span></span>
-<span><span class="co">#&gt;    start_date end_date   snomed_concept_id description     usage active_at_start</span></span>
+<span><span class="co">#&gt;    start_date end_date   snomed_code description     usage active_at_start</span></span>
 <span><span class="co">#&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;             &lt;chr&gt;           &lt;int&gt; &lt;lgl&gt;          </span></span>
 <span><span class="co">#&gt;  1 2023-08-01 2024-07-31 279991000000102   Short message… 4.41e8 TRUE           </span></span>
 <span><span class="co">#&gt;  2 2023-08-01 2024-07-31 184103008         Patient telep… 1.91e8 TRUE           </span></span>
@@ -123,15 +123,15 @@ The original data is available from NHS Digital at:</p>
 <span><span class="co">#&gt; # ℹ 135,941 more rows</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="dataset-opcs-code-usage-in-secondary-care-in-england">Dataset: OPCS Code Usage in Secondary Care in England<a class="anchor" aria-label="anchor" href="#dataset-opcs-code-usage-in-secondary-care-in-england"></a>
+<h3 id="dataset-opcs-4-code-usage-in-secondary-care-in-england">Dataset: OPCS-4 Code Usage in Secondary Care in England<a class="anchor" aria-label="anchor" href="#dataset-opcs-4-code-usage-in-secondary-care-in-england"></a>
 </h3>
-<p>This is the total annual count of each instance that each 4-character OPCS code is listed across all primary and secondary procedure positions in the Finished Consultant Episodes (FCE) of the Hospital Episode Statistics in England.</p>
-<p>This is only a selection of the full dataset published by NHS Digital, for the data pre-processing see <code>/data-raw/opcs_usage.R</code>.</p>
+<p>This is the total annual count of each instance that each 4-character OPCS-4 code is listed across all primary and secondary procedure positions in the Finished Consultant Episodes (FCE) of the Hospital Episode Statistics in England.</p>
+<p>This is only a selection of the full dataset published by NHS Digital, for the data pre-processing see <code>/data-raw/opcs4_usage.R</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Return OPCS code usage data</span></span>
-<span><span class="va">opcs_usage</span></span>
+<code class="sourceCode R"><span><span class="co"># Return OPCS-4 code usage data</span></span>
+<span><span class="va">opcs4_usage</span></span>
 <span><span class="co">#&gt; # A tibble: 107,376 × 5</span></span>
-<span><span class="co">#&gt;    start_date end_date   opcs_code description                             usage</span></span>
+<span><span class="co">#&gt;    start_date end_date   opcs4_code description                             usage</span></span>
 <span><span class="co">#&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;                                   &lt;int&gt;</span></span>
 <span><span class="co">#&gt;  1 2023-04-01 2024-03-31 A011      Hemispherectomy                             7</span></span>
 <span><span class="co">#&gt;  2 2023-04-01 2024-03-31 A012      Total lobectomy of brain                   36</span></span>
