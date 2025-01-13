@@ -52,6 +52,11 @@ test_that("Test sum of usage", {
   expect_equal(test_usage_sum, 41721589830)
 })
 
+test_that("Test no non-alphanumeric characters in SNOMED codes", {
+  non_alphanumeric_codes_snomed <- snomed_usage$snomed_code[grep("\\s?[^[:alnum:]]+\\s?", snomed_usage$snomed_code)]
+  expect_equal(length(non_alphanumeric_codes_snomed), 0)
+})
+
 # ICD-10 Tests
 
 test_that("Test icd10_usage column types", {
@@ -94,6 +99,11 @@ test_that("Test cummulative ICD-10 usage", {
 test_that("Test ICD-10 usage are all integers", {
   test_sum_non_integers <- sum(!is.integer(icd10_usage$usage))
   expect_equal(test_sum_non_integers, 0)
+})
+
+test_that("Test no non-alphanumeric characters in ICD-10 codes", {
+  non_alphanumeric_codes_icd10 <- icd10_usage$icd10_code[grep("\\s?[^[:alnum:]]+\\s?", icd10_usage$icd10_code)]
+  expect_equal(length(non_alphanumeric_codes_icd10), 0)
 })
 
 # OPCS-4 Tests
@@ -143,4 +153,9 @@ sum_all_nas <- function(df) {
 test_that("Test no missing data points", {
   test_sum_nas <- sum_all_nas(opcs4_usage)
   expect_equal(test_sum_nas, 0)
+})
+
+test_that("Test no non-alphanumeric characters in OPCS-4 codes", {
+  non_alphanumeric_codes_opcs4 <- opcs4_usage$opcs4_code[grep("\\s?[^[:alnum:]]+\\s?", opcs4_usage$opcs4_code)]
+  expect_equal(length(non_alphanumeric_codes_opcs4), 0)
 })
