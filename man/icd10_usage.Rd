@@ -13,8 +13,6 @@ A data frame with 135,951 rows and 5 columns:
 Note that the punctuation from the code has been removed for compatibility with OpenCodelists.}
 \item{usage}{Annual count of code usage.}
 \item{description}{Description of the ICD-10 Code}
-\item{usage}{Annual count of code usage.}
-\item{description}{Description of the ICD-10 Code}
 }
 }
 \source{

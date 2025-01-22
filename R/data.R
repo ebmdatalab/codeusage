@@ -46,8 +46,6 @@ NULL
 #'   Note that the punctuation from the code has been removed for compatibility with OpenCodelists.}
 #'   \item{usage}{Annual count of code usage.}
 #'   \item{description}{Description of the ICD-10 Code}
-#'   \item{usage}{Annual count of code usage.}
-#'   \item{description}{Description of the ICD-10 Code}
 #' }
 #' @source <https://digital.nhs.uk/data-and-information/publications/statistical/hospital-admitted-patient-care-activity>
 #' @examples
