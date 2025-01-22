@@ -46,6 +46,10 @@ snomed_code_usage_urls <- list(
 #   0 = SNOMED concept was either not yet available or was inactive (active = 0).
 
 # The following files show the number of times each listed SNOMED code was added to a GP patient record within the period 1 Aug to 31 July for the years available, aggregated at England level.
+
+# Disanble scientific notation
+options(scipen = 999)
+
 snomed_usage <- snomed_code_usage_urls %>%
   map(read_tsv,
     col_types = list(
