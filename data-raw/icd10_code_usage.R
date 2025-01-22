@@ -128,7 +128,7 @@ icd10_usage <- icd10_code_usage_urls |>
     end_date = as.Date(
       paste0("20", str_extract_all(end_date, "\\d+"), "-03-31")
     ),
-    icd10_code = str_replace_all(icd10_code, "\\.", "")
+    icd10_code = gsub("\\s?[^[:alnum:]]+\\s?", "", icd10_code)
   ) |>
   filter(!is.na(usage))
 

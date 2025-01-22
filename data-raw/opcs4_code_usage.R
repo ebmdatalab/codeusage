@@ -127,7 +127,7 @@ opcs4_usage <- opcs4_code_usage_urls |>
     end_date = as.Date(
       paste0("20", str_extract_all(end_date, "\\d+"), "-03-31")
     ),
-    opcs4_code = str_replace_all(opcs4_code, "\\.", "")
+    opcs4_code = gsub("\\s?[^[:alnum:]]+\\s?", "", opcs4_code)
   ) |>
   filter(!is.na(usage))
 
