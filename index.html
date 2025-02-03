@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Clinical Code Usage in England • codeusage</title>
+<title>Clinical Code Usage in England • opencodes</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="index.html">codeusage</a>
+    <a class="navbar-brand me-2" href="index.html">opencodes</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
 
@@ -35,7 +35,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/code_usage_explorer.html">Shiny: Code Usage Explorer</a></li>
+<li><a class="dropdown-item" href="articles/code_usage_explorer.html">Shiny: Explore clinical code usage in England</a></li>
   </ul>
 </li>
       </ul>
@@ -52,12 +52,12 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="codeusage">codeusage<a class="anchor" aria-label="anchor" href="#codeusage"></a>
+<div class="page-header"><h1 id="opencodes">opencodes<a class="anchor" aria-label="anchor" href="#opencodes"></a>
 </h1></div>
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>The goal of <code>codeusage</code> is to make yearly summaries of <strong>SNOMED Code Usage in Primary Care</strong> and <strong>ICD-10 and OPCS-4 Code Usage in Secondary Care</strong> in England, published by NHS Digital, available in R for research. The interactive <a href="https://milanwiedemann.shinyapps.io/codeusage/" class="external-link">Code Usage Explorer</a> dashboard provides different options to explore these datasets.<br>
+<p>The goal of <code>opencodes</code> is to make yearly summaries of <strong>SNOMED Code Usage in Primary Care</strong> and <strong>ICD-10 and OPCS-4 Code Usage in Secondary Care</strong> in England, published by NHS Digital, available in R for research. The interactive <a href="https://milanwiedemann.shinyapps.io/opencodes/" class="external-link">Code Usage Explorer</a> dashboard provides different options to explore these datasets.<br>
 The original data is available from NHS Digital at:</p>
 <ul>
 <li><a href="https://digital.nhs.uk/data-and-information/publications/statistical/mi-snomed-code-usage-in-primary-care" class="external-link">SNOMED Code Usage in Primary Care</a></li>
@@ -66,16 +66,16 @@ The original data is available from NHS Digital at:</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of <code>codeusage</code> like so:</p>
+<p>You can install the development version of <code>opencodes</code> like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ebmdatalab/codeusage"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ebmdatalab/opencodes"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load codeusage package</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebmdatalab/codeusage" class="external-link">codeusage</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Load opencodes package</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ebmdatalab/codeusage" class="external-link">opencodes</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="dataset-snomed-code-usage-in-primary-care-in-england">Dataset: SNOMED Code Usage in Primary Care in England<a class="anchor" aria-label="anchor" href="#dataset-snomed-code-usage-in-primary-care-in-england"></a>
 </h3>
@@ -84,18 +84,18 @@ The original data is available from NHS Digital at:</p>
 <code class="sourceCode R"><span><span class="co"># Return SNOMED code usage data</span></span>
 <span><span class="va">snomed_usage</span></span>
 <span><span class="co">#&gt; # A tibble: 1,523,967 × 7</span></span>
-<span><span class="co">#&gt;    start_date end_date   snomed_code description     usage active_at_start</span></span>
-<span><span class="co">#&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;             &lt;chr&gt;           &lt;int&gt; &lt;lgl&gt;          </span></span>
-<span><span class="co">#&gt;  1 2023-08-01 2024-07-31 279991000000102   Short message… 4.41e8 TRUE           </span></span>
-<span><span class="co">#&gt;  2 2023-08-01 2024-07-31 184103008         Patient telep… 1.91e8 TRUE           </span></span>
-<span><span class="co">#&gt;  3 2023-08-01 2024-07-31 428481002         Patient mobil… 1.16e8 TRUE           </span></span>
-<span><span class="co">#&gt;  4 2023-08-01 2024-07-31 423876004         Clinical docu… 7.81e7 TRUE           </span></span>
-<span><span class="co">#&gt;  5 2023-08-01 2024-07-31 72313002          Systolic arte… 6.87e7 TRUE           </span></span>
-<span><span class="co">#&gt;  6 2023-08-01 2024-07-31 1091811000000102  Diastolic art… 6.87e7 TRUE           </span></span>
-<span><span class="co">#&gt;  7 2023-08-01 2024-07-31 1000731000000107  Serum creatin… 4.82e7 TRUE           </span></span>
-<span><span class="co">#&gt;  8 2023-08-01 2024-07-31 60621009          Body mass ind… 4.65e7 TRUE           </span></span>
-<span><span class="co">#&gt;  9 2023-08-01 2024-07-31 1000661000000107  Serum sodium … 4.63e7 TRUE           </span></span>
-<span><span class="co">#&gt; 10 2023-08-01 2024-07-31 1000651000000109  Serum potassi… 4.62e7 TRUE           </span></span>
+<span><span class="co">#&gt;    start_date end_date   snomed_code      description      usage active_at_start</span></span>
+<span><span class="co">#&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;            &lt;chr&gt;            &lt;int&gt; &lt;lgl&gt;          </span></span>
+<span><span class="co">#&gt;  1 2023-08-01 2024-07-31 279991000000102  Short message … 4.41e8 TRUE           </span></span>
+<span><span class="co">#&gt;  2 2023-08-01 2024-07-31 184103008        Patient teleph… 1.91e8 TRUE           </span></span>
+<span><span class="co">#&gt;  3 2023-08-01 2024-07-31 428481002        Patient mobile… 1.16e8 TRUE           </span></span>
+<span><span class="co">#&gt;  4 2023-08-01 2024-07-31 423876004        Clinical docum… 7.81e7 TRUE           </span></span>
+<span><span class="co">#&gt;  5 2023-08-01 2024-07-31 72313002         Systolic arter… 6.87e7 TRUE           </span></span>
+<span><span class="co">#&gt;  6 2023-08-01 2024-07-31 1091811000000102 Diastolic arte… 6.87e7 TRUE           </span></span>
+<span><span class="co">#&gt;  7 2023-08-01 2024-07-31 1000731000000107 Serum creatini… 4.82e7 TRUE           </span></span>
+<span><span class="co">#&gt;  8 2023-08-01 2024-07-31 60621009         Body mass inde… 4.65e7 TRUE           </span></span>
+<span><span class="co">#&gt;  9 2023-08-01 2024-07-31 1000661000000107 Serum sodium l… 4.63e7 TRUE           </span></span>
+<span><span class="co">#&gt; 10 2023-08-01 2024-07-31 1000651000000109 Serum potassiu… 4.62e7 TRUE           </span></span>
 <span><span class="co">#&gt; # ℹ 1,523,957 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 1 more variable: active_at_end &lt;lgl&gt;</span></span></code></pre></div>
 </div>
@@ -131,18 +131,18 @@ The original data is available from NHS Digital at:</p>
 <code class="sourceCode R"><span><span class="co"># Return OPCS-4 code usage data</span></span>
 <span><span class="va">opcs4_usage</span></span>
 <span><span class="co">#&gt; # A tibble: 107,376 × 5</span></span>
-<span><span class="co">#&gt;    start_date end_date   opcs4_code description                             usage</span></span>
-<span><span class="co">#&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;                                   &lt;int&gt;</span></span>
-<span><span class="co">#&gt;  1 2023-04-01 2024-03-31 A011      Hemispherectomy                             7</span></span>
-<span><span class="co">#&gt;  2 2023-04-01 2024-03-31 A012      Total lobectomy of brain                   36</span></span>
-<span><span class="co">#&gt;  3 2023-04-01 2024-03-31 A013      Partial lobectomy of brain                134</span></span>
-<span><span class="co">#&gt;  4 2023-04-01 2024-03-31 A018      Other specified major excision of tiss…    27</span></span>
-<span><span class="co">#&gt;  5 2023-04-01 2024-03-31 A019      Unspecified major excision of tissue o…     3</span></span>
-<span><span class="co">#&gt;  6 2023-04-01 2024-03-31 A021      Excision of lesion of tissue of fronta…  1399</span></span>
-<span><span class="co">#&gt;  7 2023-04-01 2024-03-31 A022      Excision of lesion of tissue of tempor…   971</span></span>
-<span><span class="co">#&gt;  8 2023-04-01 2024-03-31 A023      Excision of lesion of tissue of pariet…   704</span></span>
-<span><span class="co">#&gt;  9 2023-04-01 2024-03-31 A024      Excision of lesion of tissue of occipi…   260</span></span>
-<span><span class="co">#&gt; 10 2023-04-01 2024-03-31 A025      Excision of lesion of tissue of cerebe…   604</span></span>
+<span><span class="co">#&gt;    start_date end_date   opcs4_code description                            usage</span></span>
+<span><span class="co">#&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;      &lt;chr&gt;                                  &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1 2023-04-01 2024-03-31 A011       Hemispherectomy                            7</span></span>
+<span><span class="co">#&gt;  2 2023-04-01 2024-03-31 A012       Total lobectomy of brain                  36</span></span>
+<span><span class="co">#&gt;  3 2023-04-01 2024-03-31 A013       Partial lobectomy of brain               134</span></span>
+<span><span class="co">#&gt;  4 2023-04-01 2024-03-31 A018       Other specified major excision of tis…    27</span></span>
+<span><span class="co">#&gt;  5 2023-04-01 2024-03-31 A019       Unspecified major excision of tissue …     3</span></span>
+<span><span class="co">#&gt;  6 2023-04-01 2024-03-31 A021       Excision of lesion of tissue of front…  1399</span></span>
+<span><span class="co">#&gt;  7 2023-04-01 2024-03-31 A022       Excision of lesion of tissue of tempo…   971</span></span>
+<span><span class="co">#&gt;  8 2023-04-01 2024-03-31 A023       Excision of lesion of tissue of parie…   704</span></span>
+<span><span class="co">#&gt;  9 2023-04-01 2024-03-31 A024       Excision of lesion of tissue of occip…   260</span></span>
+<span><span class="co">#&gt; 10 2023-04-01 2024-03-31 A025       Excision of lesion of tissue of cereb…   604</span></span>
 <span><span class="co">#&gt; # ℹ 107,366 more rows</span></span></code></pre></div>
 </div>
 </div>
@@ -167,7 +167,7 @@ The original data is available from NHS Digital at:</p>
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing codeusage</a></li>
+<li><a href="authors.html#citation">Citing opencodes</a></li>
 </ul>
 </div>
 
