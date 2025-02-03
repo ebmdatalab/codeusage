@@ -1,4 +1,4 @@
-Package: codeusage
+Package: opencodes
 Title: Clinical Code Usage in England
 Version: 0.0.1
 Authors@R: c(

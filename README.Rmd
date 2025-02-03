@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# codeusage
+# opencodes
 
 <!-- badges: start -->
 
@@ -21,8 +21,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-The goal of `codeusage` is to make yearly summaries of **SNOMED Code Usage in Primary Care** and **ICD-10 and OPCS-4 Code Usage in Secondary Care** in England, published by NHS Digital, available in R for research.
-The interactive [Code Usage Explorer](https://milanwiedemann.shinyapps.io/codeusage/) dashboard provides different options to explore these datasets.  
+The goal of `opencodes` is to make yearly summaries of **SNOMED Code Usage in Primary Care** and **ICD-10 and OPCS-4 Code Usage in Secondary Care** in England, published by NHS Digital, available in R for research.
+The interactive [Code Usage Explorer](https://milanwiedemann.shinyapps.io/opencodes/) dashboard provides different options to explore these datasets.  
 The original data is available from NHS Digital at:
 
 -   [SNOMED Code Usage in Primary Care](https://digital.nhs.uk/data-and-information/publications/statistical/mi-snomed-code-usage-in-primary-care)
@@ -30,17 +30,17 @@ The original data is available from NHS Digital at:
 
 ## Installation
 
-You can install the development version of `codeusage` like so:
+You can install the development version of `opencodes` like so:
 
 ``` r
-remotes::install_github("ebmdatalab/codeusage")
+remotes::install_github("ebmdatalab/opencodes")
 ```
 
 ## Example
 
 ```{r load-pkg}
-# Load codeusage package
-library(codeusage)
+# Load opencodes package
+library(opencodes)
 ```
 
 ### Dataset: SNOMED Code Usage in Primary Care in England

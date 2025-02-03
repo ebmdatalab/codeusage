@@ -1,5 +1,5 @@
 ---
-title: "Shiny: Code Usage Explorer"
+title: "Shiny: Explore clinical code usage in England"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{shiny_code_usage_explorer}
@@ -23,6 +23,6 @@ vignette: >
 </style>
 
 <div class="shiny-app-frame"> 
-<iframe src="https://milanwiedemann.shinyapps.io/codeusage/">
+<iframe src="https://milanwiedemann.shinyapps.io/opencodes/">
 </iframe>
 </div>

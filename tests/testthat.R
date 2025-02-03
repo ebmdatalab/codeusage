@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(codeusage)
+library(opencodes)
 
-test_check("codeusage")
+test_check("opencodes")
