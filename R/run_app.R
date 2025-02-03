@@ -1,4 +1,4 @@
-#' Run [Code Usage Explorer](https://milanwiedemann.shinyapps.io/codeusage/) Shiny App
+#' Run [Code Usage Explorer](https://milanwiedemann.shinyapps.io/opencodes/) Shiny App
 #'
 #' @export
 run_app <- function() {
