@@ -30,6 +30,8 @@ app_server <- function(input, output, session) {
   # Selected code usage dataset
   selected_data <- reactive({
 
+    updateCheckboxInput(session, "show_individual_codes", value = FALSE)
+
     if (input$dataset == "snomedct") {
       opencodes::snomed_usage |>
         select(start_date, end_date, code = snomed_code, description, usage)
