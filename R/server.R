@@ -21,13 +21,15 @@ app_server <- function(input, output, session) {
   # Reset search inputs when dataset changes
   observe({
     rv_search_method("none")
-    updateSelectizeInput(session, "code_search", selected = character(0))
+    updateSelectizeInput(session, "code_specific_search", selected = character(0))
+    updateSelectizeInput(session, "code_pattern_search", selected = character(0))
     updateTextInput(session, "description_search", value = "")
   }) |>
     bindEvent(input$dataset)
 
   # Selected code usage dataset
   selected_data <- reactive({
+
     if (input$dataset == "snomedct") {
       opencodes::snomed_usage |>
         select(start_date, end_date, code = snomed_code, description, usage)
@@ -43,7 +45,7 @@ app_server <- function(input, output, session) {
   # Update code search choices depending on selected dataset
   observe({
     updateSelectizeInput(
-      session, "code_search",
+      session, "code_specific_search",
       choices = unique(selected_data()$code),
       server = TRUE
     )
@@ -73,7 +75,8 @@ app_server <- function(input, output, session) {
             rv_search_method("codelist")
 
             # Reset search inputs
-            updateSelectizeInput(session, "code_search", selected = character(0))
+            updateSelectizeInput(session, "code_specific_search", selected = character(0))
+            updateTextInput(session, "code_pattern_search", value = "")
             updateTextInput(session, "description_search", value = "")
           } else {
             showNotification(
@@ -105,14 +108,15 @@ app_server <- function(input, output, session) {
 
   # Set filtering method to search when search inputs change
   observe({
-    if (!is.null(input$code_search) && length(input$code_search) > 0 ||
+    if (!is.null(input$code_specific_search) && length(input$code_specific_search) > 0 ||
+        !is.null(input$code_pattern_search) && input$code_pattern_search != "" ||
       !is.null(input$description_search) && input$description_search != "") {
       rv_search_method("search")
     } else {
       rv_search_method("none")
     }
   }) |>
-    bindEvent(input$code_search, input$description_search)
+    bindEvent(input$code_specific_search, input$code_pattern_search, input$description_search)
 
   # Filtered usage data
   filtered_data <- reactive({
@@ -123,9 +127,14 @@ app_server <- function(input, output, session) {
 
       # Apply filters based on the current filtering method
       if (rv_search_method() == "search") {
-        if (!is.null(input$code_search) && length(input$code_search) > 0) {
+        if (!is.null(input$code_specific_search) && length(input$code_specific_search) > 0) {
           data <- data |>
-            filter(code %in% input$code_search)
+            filter(code %in% input$code_specific_search)
+        }
+        
+        if (!is.null(input$code_pattern_search) && input$code_pattern_search != "") {
+          data <- data |>
+            filter(grepl(input$code_pattern_search, code, ignore.case = TRUE))
         }
 
         if (!is.null(input$description_search) && input$description_search != "") {

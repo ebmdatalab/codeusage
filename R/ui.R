@@ -42,7 +42,7 @@ app_ui <- function(request) {
       card(
         card_header("Select codes"),
         selectizeInput(
-          "code_search",
+          "code_specific_search",
           tooltip(
             span(
               "Specific code",
@@ -56,6 +56,19 @@ app_ui <- function(request) {
           choices = NULL,
           multiple = TRUE,
           options = list(maxOptions = 15)
+        ),
+        textInput(
+          "code_pattern_search",
+          tooltip(
+            span(
+              "Code pattern",
+              bs_icon("info-circle")
+            ),
+            "Enter a code pattern (e.g., beginning or ending of a code). Multiple code patterns can be combined by using '|'.",
+            options = list(
+              customClass = "left-align-tooltip"
+            )
+          )
         ),
         textInput(
           "description_search",
