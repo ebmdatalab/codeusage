@@ -64,7 +64,7 @@ app_ui <- function(request) {
               "Code pattern",
               bs_icon("info-circle")
             ),
-            "Enter a code pattern (e.g., beginning or ending of a code). Multiple code patterns can be combined by using '|'.",
+            "Enter any part of a code (e.g. letters indicating the category of an ICD-10 code). Multiple patterns can be combined using '|'.",
             options = list(
               customClass = "left-align-tooltip"
             )
