@@ -13,10 +13,6 @@
 #' @importFrom plotly renderPlotly ggplotly plot_ly config add_lines layout
 #' @import here 
 
-source("R/opencodelists.R")
-source("R/plots.R")
-source("R/tables.R")
-
 app_server <- function(input, output, session) {
   # Reactive values for search method (1)none, (2) code/desc or (3) codelist) and codelist data
   rv_search_method <- reactiveVal("none")
