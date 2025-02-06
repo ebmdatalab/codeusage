@@ -16,6 +16,20 @@ on:
 
 jobs:
   shinylive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: '4.3.1'
+
+      - name: Install opencodes from Main Branch
+        run: |
+          Rscript -e 'pak::pkg_install("github::bennettoxford/opencodes@main")'
+  
     uses: posit-dev/r-shinylive/.github/workflows/deploy-app.yaml@actions-v1
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
