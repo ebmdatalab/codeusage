@@ -11,7 +11,11 @@
 #' @importFrom lubridate month year
 #' @importFrom DT renderDT
 #' @importFrom plotly renderPlotly ggplotly plot_ly config add_lines layout
-#' @import here
+#' @import here 
+
+source("R/opencodelists.R")
+source("R/plots.R")
+source("R/tables.R")
 
 app_server <- function(input, output, session) {
   # Reactive values for search method (1)none, (2) code/desc or (3) codelist) and codelist data
@@ -33,13 +37,16 @@ app_server <- function(input, output, session) {
     updateCheckboxInput(session, "show_individual_codes", value = FALSE)
 
     if (input$dataset == "snomedct") {
-      opencodes::snomed_usage |>
+      load(here::here("data/snomed_usage.rda"))
+      snomed_usage |>
         select(start_date, end_date, code = snomed_code, description, usage)
     } else if (input$dataset == "icd10") {
-      opencodes::icd10_usage |>
+      load(here::here("data/icd10_usage.rda"))
+      icd10_usage |>
         select(start_date, end_date, code = icd10_code, description, usage)
     } else if (input$dataset == "opcs4") {
-      opencodes::opcs4_usage |>
+      load(here::here("data/opcs4_usage.rda"))
+      opcs4_usage |>
         select(start_date, end_date, code = opcs4_code, description, usage)
     }
   })
